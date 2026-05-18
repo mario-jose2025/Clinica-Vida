@@ -1,0 +1,1044 @@
+/* ==========================================================================
+   1. CONFIGURACIÓN GENERAL, FUENTES Y RESET
+   ========================================================================== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #1e293b;
+}
+/*Todos los títulos de la web usarán Poppins */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* Paleta de colores */
+:root {
+    --azul-oscuro: #1b4b8a;
+    --azul-banner: #245296;
+    --fondo-azul-claro: #e6f0fa;
+    --fondo-input: #f0f5fa;
+    --texto-oscuro: #1a2e40;
+    --texto-gris: #555;
+}
+
+/* Contenedor global centrado */
+.container {
+    width: 90%;  
+    margin: auto; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* ==========================================================================
+   2. HEADER (MENÚ DE NAVEGACIÓN)
+   ========================================================================== */
+
+header {
+    background-color: #0b2c5d; 
+    height: 80px;                
+    padding: 15px 0;         
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.logo img {
+    height: 65px;
+    object-fit: contain;
+}
+
+/* Menú de Enlaces */
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 500; 
+    transition: 0.3s; 
+}
+
+.nav a:hover {
+    color: #4fc3f7;
+}
+
+
+/* ==========================================================================
+   3. SECCIÓN: HERO (INICIO) & CTA
+   ========================================================================== */
+
+.hero {
+    background-color: #f1f5f9;
+    padding: 80px 0;
+}
+
+.hero-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #cfe8e8;
+    padding: 8px 18px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    align-self: flex-start;   
+}
+
+.hero-left {
+    font-family: 'Poppins', sans-serif;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.primer-titulo {
+    color: #0b2c5d;
+}
+
+.segundo-titulo {
+    color: #2563eb;
+}
+
+.hero-description {
+    font-size: 16px;
+    margin-bottom: 60px;
+    line-height: 1.6;
+}
+
+/* Estadísticas */
+.stats {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    gap: 40px;
+}
+
+.stat h3 {
+    color: #2563eb;
+    font-size: 22px;
+}
+
+/* Imagen Derecha */
+.hero-right {
+    width: 50%;
+}
+
+.hero-right img {
+    width: 100%;
+}
+
+/* Llamado a la Acción (CTA) */
+.cta {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #1e4ed8;
+}
+
+
+/* ==========================================================================
+   4. SECCIÓN: SERVICIOS
+   ========================================================================== */
+
+.services .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    display: block; 
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 50px; 
+}
+
+.services-header h2 {
+    color: #2c3e50; 
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.services-header p {
+    color: #555;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto; 
+}
+
+/* El Grid de Servicios (3 Columnas) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+}
+
+/* Las Tarjetas de Servicio (Cards) */
+.service-card {
+    background-color: #e8f0fe; 
+    padding: 30px;
+    border-radius: 15px;
+    text-align: left; 
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.service-icon img {
+    width: 50px; 
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.service-card p {
+    color: #444;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+
+/* ==========================================================================
+   5. SECCIÓN: PROMOCIONES
+   ========================================================================== */
+
+.promotions {
+    background-color: #f4f8ff; 
+    padding: 80px 20px;
+    width: 100%;
+}
+
+.promotions .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+/* Encabezado de Promociones (Estrella + Texto) */
+.promo-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    gap: 40px;
+    max-width: 900px;
+}
+
+.special-offer-img {
+    animation: rotateSlow 8s linear infinite; 
+    width: 150px; 
+    height: auto;
+    flex-shrink: 0; 
+}
+
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.header-text h2 {
+    color: #2c3e50;
+    font-size: 2.8rem;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* --- GRID DE TARJETAS (2 Columnas - Más pequeñas y separadas) --- */
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 60px; 
+    width: 100%;
+    max-width: 950px;
+}
+
+.promo-card {
+    background-color: #e8f0fe; 
+    border-radius: 20px; 
+    overflow: hidden;    
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04); 
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+/* Cabecera azul de la tarjeta */
+.card-header {
+    background-color: #4a90e2; 
+    color: white;
+    padding: 15px 25px; 
+    font-weight: 600;
+    font-size: 1.15rem; 
+    text-align: left;
+}
+
+.card-body {
+    padding: 25px 25px; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.discount {
+    color: #4a90e2;
+    font-size: 2.2rem; 
+    font-weight: 700;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.card-body p {
+    color: #444;
+    font-size: 0.95rem; 
+    line-height: 1.5;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* --- BOTÓN "VER DETALLES" --- */
+.btn-details {
+    background-color: #5b9bd5;
+    color: white;
+    border: none;
+    padding: 12px 0; 
+    width: 100%; 
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-details:hover {
+    background-color: #4080c0;
+    transform: scale(1.02);
+}
+
+
+/* ==========================================================================
+   6. SECCIÓN: REGISTRO DE PACIENTES (FORMULARIO)
+   ========================================================================== */
+
+.registro-section {
+    background-color: #f1f5f9; 
+    padding: 90px 20px;
+    border-top: 1px solid #f9fbfd; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.registro-header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.registro-header h1 {
+    color: var(--azul-oscuro);
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.registro-header p {
+    color: var(--texto-oscuro);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Contenedor del Formulario */
+.form-container {
+    background-color: var(--fondo-azul-claro);
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px; 
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+}
+
+/* Banner Superior del Form */
+.form-banner {
+    background-color: var(--azul-banner);
+    color: rgb(220, 216, 216);
+    padding: 18px 25px;
+}
+
+.form-banner h3 {
+    font-size: 1.35rem;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+}
+
+.form-banner p {
+    font-size: 0.95rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Cuerpo del Formulario con Grid */
+.form-body {
+    padding: 35px 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    color: var(--texto-oscuro);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input, 
+.input-group select {
+    background-color: var(--fondo-input);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    color: var(--texto-oscuro);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus, 
+.input-group select:focus {
+    border-color: var(--azul-banner);
+    background-color: #ffffff;
+}
+
+/* Bloque final del botón */
+.form-actions {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.btn-submit {
+    background-color: var(--azul-banner);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 0;
+    width: 60%;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+    background-color: var(--azul-oscuro);
+    transform: translateY(-1px);
+}
+
+.form-footer-text {
+    color: var(--texto-oscuro);
+    font-size: 0.85rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+
+/* ==========================================================================
+   7. DISEÑO RESPONSIVO (MEDIA QUERIES MÓVIL)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 600px) {
+    .services-grid {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* Ajustes de Promociones */
+@media (max-width: 900px) {
+    .promo-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .special-offer-img {
+        width: 120px;
+    }
+
+    .header-text h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Ajustes de Formulario de Registro */
+@media (max-width: 600px) {
+    .form-body {
+        grid-template-columns: 1fr;
+    }
+    .form-actions {
+        grid-column: span 1;
+    }
+    .btn-submit {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   6.5 SECCIÓN: SOBRE NOSOTROS
+   ========================================================================== */
+
+.about-section {
+    background-color: #f4f8ff; 
+    padding: 80px 20px;
+    width: 100%;
+}
+
+.about-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+/* Lado Izquierdo: Contenido */
+.about-content {
+    width: 55%;
+}
+
+.about-content h2 {
+    font-family: 'Poppins', sans-serif;
+    color: #0b2c5d; 
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.about-content .destaque-azul {
+    color: #4a90e2; 
+}
+
+.about-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #1a2e40;
+    margin-bottom: 25px;
+}
+
+/* Lista de Checks */
+.about-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.about-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #1a2e40;
+}
+
+.check-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2563eb; 
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* Lado Derecho: Bloques celestes de estadísticas */
+.about-stats-side {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-stat-card {
+    background-color: #e8f0fe; 
+    padding: 25px 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.about-stat-card h3 {
+    color: #2563eb;
+    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.about-stat-card p {
+    color: #0b2c5d;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+/* ==========================================================================
+   6.6 PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
+
+.footer {
+    background-color: #0b2c5d; 
+    color: white;
+    padding: 60px 20px 20px 20px;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.footer-col h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* Enlaces y Listas del Footer */
+.footer-links, .footer-contact {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #4fc3f7;
+    opacity: 1;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+.icon-footer {
+    font-size: 1.1rem;
+}
+
+/* Iconos de redes sociales */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.social-link:hover {
+    background-color: #2563eb;
+    transform: translateY(-3px);
+}
+
+/* Barra inferior del Footer */
+.footer-bottom {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-legal a:hover {
+    text-decoration: underline;
+}
+/* ==========================================================================
+   MODAL DE PROMOCIONES (Ventana Emergente Interactiva)
+   ========================================================================== */
+
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(9, 30, 61, 0.7); 
+    z-index: 2000; 
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px); 
+}
+
+.modal-content {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeInModal 0.3s ease;
+}
+
+@keyframes fadeInModal {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Botón Cerrar (X) */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: #555;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover {
+    color: #4a90e2;
+}
+
+.modal-body-content h2 {
+    color: #0b2c5d;
+    margin-bottom: 15px;
+}
+
+.modal-body-content p {
+    color: #444;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.modal-divider {
+    border: 0;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 20px 0;
+}
+
+/* Botones de Interacción */
+.modal-interactions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.interaction-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    color: #1a2e40;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.interaction-btn:hover {
+    background-color: #e8f0fe;
+    border-color: #4a90e2;
+    color: #4a90e2;
+}
+
+/* Botón Like Activo */
+.interaction-btn.liked {
+    background-color: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+/* Sección de Comentarios */
+.modal-comments-section h3 {
+    font-size: 1.1rem;
+    color: #0b2c5d;
+    margin-bottom: 10px;
+}
+
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-box textarea {
+    width: 100%;
+    height: 70px;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    resize: none;
+    font-family: inherit;
+    outline: none;
+}
+
+.comment-box textarea:focus {
+    border-color: #4a90e2;
+}
+
+.btn-submit-comment {
+    align-self: flex-end;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.btn-submit-comment:hover {
+    background-color: #0b2c5d;
+}
+
+.comments-list {
+    max-height: 120px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-comment {
+    background-color: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #334155;
+}
+/* ==========================================================================
+   BOTÓN FLOTANTE DE LLAMADA
+   ========================================================================== */
+
+.btn-call-flotante {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #22bf93; 
+    color: white !important;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+    z-index: 1500; 
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: pulseCall 2s infinite; 
+}
+
+.btn-call-flotante:hover {
+    background-color: #0b2c5d; 
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(11, 44, 93, 0.4);
+}
+
+/* Animación de pulso para que sea más llamativo */
+@keyframes pulseCall {
+    0% {
+        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(74, 144, 226, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-call-flotante {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+}
+/* ==========================================================================
+   ANIMACIONES CINEMÁTICAS DE ENTRADA 
+   ========================================================================== */
+
+/* --- Animación para Textos, Stats y CTA (Suben suavemente) --- */
+.animar-entrada {
+    opacity: 0;
+    transform: translateY(25px); 
+    animation: fadeUpHero 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* --- Animación para la Imagen de la Doctora (Efecto Zoom-in) --- */
+.animar-zoom {
+    opacity: 0;
+    transform: scale(0.95); 
+    animation: zoomInHero 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards; 
+}
+
+/* --- Tiempos de retraso en Cascada (Delays) --- */
+.retraso-1 { animation-delay: 0.15s; }
+.retraso-2 { animation-delay: 0.30s; }
+.retraso-3 { animation-delay: 0.45s; }
+.retraso-4 { animation-delay: 0.60s; }
+
+/* --- Mecánica de los Keyframes --- */
+@keyframes fadeUpHero {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomInHero {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
