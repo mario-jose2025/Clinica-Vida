@@ -18,33 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
             fecha_registro: document.getElementById('fecha').value
         };
 
-        try {
-            // 4. Enviamos los datos a tu servidor backend en el puerto 3000
-            const respuesta = await fetch('http://localhost:3000/api/registrar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json' // Le avisamos al backend que le enviamos un JSON
-                },
-                body: JSON.stringify(datosPaciente) // Convertimos el objeto a texto plano tipo JSON
-            });
+               try {
+            // Enviamos los datos usando la conexión que inyectamos en el HTML
+            const { data, error } = await window._supabase
+                .from('pacientes')
+                .insert([datosPaciente]);
 
-            // Esperamos la respuesta del servidor
-            const resultado = await respuesta.json();
+            if (error) throw error;
 
-            // 5. Si el servidor responde que todo salió bien (Status 200)
-            if (respuesta.ok) {
-                alert('🎉 ¡Paciente registrado con éxito en la Clínica Vida!');
-                formulario.reset(); // Limpia todos los campos del formulario automáticamente
-            } else {
-                // Si el backend tiró un error controlado
-                alert('❌ Error del servidor: ' + resultado.error);
-            }
+            alert('🎉 ¡Paciente registrado con éxito en la Clínica Vida!');
+            formulario.reset(); 
 
         } catch (error) {
-            // Si el servidor backend está apagado o no se pudo conectar
-            console.error('Error de conexión:', error);
-            alert('⚠️ No se pudo conectar con el servidor. Asegurate de que el backend esté corriendo.');
+            console.error('Error de conexión:', error.message);
+            alert('❌ Hubo un problema al registrar: ' + error.message);
         }
+
     });
 });
 document.addEventListener("DOMContentLoaded", () => {
@@ -352,9 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             imgServicio.alt = datos.titulo;
             itemIncluye.innerHTML = datos.incluye;
             itemStaff.innerHTML = datos.staff;
-            
-            // Reemplazamos el enlace de WhatsApp con su mensaje personalizado
-            // RECUERDA: Cambiar el número 50588888888 por tu número real
+        
             linkWhatsapp.href = `https://wa.me/50588888888?text=${encodeURIComponent(datos.msgWhatsapp)}`;
 
             // Ocultamos landing y mostramos detalles
