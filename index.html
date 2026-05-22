@@ -36,57 +36,61 @@
             </nav>
         </div>
     </header>
-<section class="hero" id="inicio">
-        <div class="hero-container">
-            <div class="hero-left">
-                <div class="badge animar-entrada">
-                    Bienvenido a Clínica Vida
+<section id="inicio" class="hero-section">
+    <div class="hero-slider">
+        <div class="slide active" style="background-image: url('Imagen/imgdoctores.png');"></div>
+        <div class="slide" style="background-image: url('Imagen/imgdos.png');"></div>
+        <div class="slide" style="background-image: url('Imagen/imgtres.png');"></div>
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+        <div class="hero-content">
+            <span class="welcome-badge">Bienvenido a Clínica Vida</span>
+            
+            <h1>Tu salud es Nuestro <br><span class="highlight">Propósito</span></h1>
+            
+            <p class="hero-description">
+                En clínica vida nos dedicamos a brindar servicios médicos de excelencia con profesionales certificados y especializados. Contamos con un equipo comprometido con tu bienestar y la salud de tu familia.
+            </p>
+
+            <div class="stats-card">
+                <div class="stat-item">
+                    <h3>20</h3>
+                    <p>Años de Experiencia</p>
                 </div>
-
-                <h1 class="animar-entrada retraso-1">
-                    <span class="primer-titulo">Tu salud es nuestro</span> <br>
-                    <span class="segundo-titulo">Propósito</span>
-                </h1>
-
-                <p class="hero-description animar-entrada retraso-2">
-                    En Clínica Vida nos dedicamos a brindar servicios médicos
-                    de excelencia con profesionales certificados y especializados.
-                    Contamos con un equipo comprometido con tu bienestar y la salud de tu familia.
-                </p>
-
-                <div class="stats animar-entrada retraso-3">
-                    <div class="stat">
-                        <h3>20+</h3>
-                        <p>Años de Experiencia</p>
-                    </div>
-
-                    <div class="stat">
-                        <h3>15k</h3>
-                        <p>Pacientes Atendidos</p>
-                    </div>
-
-                    <div class="stat">
-                        <h3>10+</h3>
-                        <p>Especialistas</p>
-                    </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <h3>15K</h3>
+                    <p>Pacientes atendidos</p>
                 </div>
-
-                <div class="cta animar-entrada retraso-4">
-                    <p class="cta-text">
-                        Regístrate para obtener <br>
-                        ofertas especiales
-                    </p>
-                    <a href="#registro" class="btn-primary">
-                        Registrarse
-                    </a>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <h3>10+</h3>
+                    <p>Especialistas</p>
                 </div>
             </div>
 
-            <div class="hero-right animar-zoom">
-                <img src="Imagen/doctora.png" alt="Imagen doctora Clínica Vida">
+            <div class="cta-row">
+                <p>Regístrate para obtener ofertas especiales.</p>
+                <a href="#registro" class="btn-register">
+                    <i class="fas fa-user-plus"></i> Registrarse
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+
+    <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+
+    <div class="slider-dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+    </div>
+</section>
+
 
     <section class="services" id="servicios">
         <div class="container">

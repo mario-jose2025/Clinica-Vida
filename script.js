@@ -180,3 +180,35 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    // === ESTO DEL CARRUCEL DE LAS IMG===
+
+    let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function showSlide(index) {
+    if (index >= slides.length) currentSlideIndex = 0;
+    if (index < 0) currentSlideIndex = slides.length - 1;
+
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    slides[currentSlideIndex].classList.add('active');
+    dots[currentSlideIndex].classList.add('active');
+}
+
+function moveSlide(step) {
+    currentSlideIndex += step;
+    showSlide(currentSlideIndex);
+}
+
+function currentSlide(index) {
+    currentSlideIndex = index;
+    showSlide(currentSlideIndex);
+}
+
+// Slider automático
+setInterval(() => {
+    moveSlide(1);
+}, 5000);
+
