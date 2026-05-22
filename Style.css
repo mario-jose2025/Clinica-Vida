@@ -801,126 +801,191 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
+/* ==========================================================
+   ESTILOS PREMIUM PARA EL FOOTER (MODERNO Y COMPACTO)
+   ========================================================== */
 
-/* ==========================================================================
-   6.6 PIE DE PÁGINA (FOOTER)
-   ========================================================================== */
-
-.footer {
-    background-color: #0b2c5d; 
-    color: white;
-    padding: 60px 20px 20px 20px;
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
+.modern-footer {
+    background-color: #04244c; /* Tu color azul marino original */
+    color: #ffffff;
+    padding: 70px 0 0 0;
+    font-family: 'Poppins', sans-serif; /* O la fuente limpia que uses */
 }
 
-.footer-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
+.footer-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 40px;
-    padding-bottom: 40px;
+    /* Equilibra las columnas para que el logo y contacto tengan más espacio */
+    grid-template-columns: 1.3fr 0.8fr 1.3fr 0.8fr; 
+    gap: 30px;
+    padding-bottom: 50px;
 }
 
-.footer-col h3 {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+/* Columna de la Marca (Logo + Texto) */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Logo y texto alineados a la izquierda */
+    gap: 15px; 
 }
 
-.footer-col p {
-    font-size: 0.95rem;
+.footer-logo {
+    max-width: 150px; /* Tamaño ideal */
+    height: auto;
+    display: block;
+}
+
+.footer-text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espacio reducido entre líneas de texto */
+}
+
+.footer-text-block p {
+    color: #cbd5e1;
+    font-size: 14px;
     line-height: 1.6;
-    opacity: 0.8;
+    margin: 0;
 }
 
-/* Enlaces y Listas del Footer */
-.footer-links, .footer-contact {
+.footer-email {
+    color: #38bdf8 !important; /* Azul celeste para el correo */
+    font-weight: 500;
+}
+
+/* Títulos de Columnas */
+.footer-title {
+    color: #38bdf8; /* Azul celeste brillante */
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+}
+
+/* Listas y Enlaces (Navegación y Contacto) */
+.footer-menu, .footer-info-list {
     list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.footer-links a {
-    color: white;
+.footer-menu a, .footer-info-list li span {
+    color: #cbd5e1;
     text-decoration: none;
-    opacity: 0.8;
-    transition: 0.3s;
+    font-size: 14px;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.footer-links a:hover {
-    color: #4fc3f7;
-    opacity: 1;
+.footer-menu a:hover {
+    color: #ffffff;
+    transform: translateX(4px); /* Pequeño movimiento */
 }
 
-.footer-contact li {
+/* Redes Sociales Círculos */
+.footer-social-media {
     display: flex;
-    align-items: center;
     gap: 10px;
-    opacity: 0.8;
-    font-size: 0.95rem;
 }
 
-.icon-footer {
-    font-size: 1.1rem;
-}
-
-/* Iconos de redes sociales */
-.social-icons {
-    display: flex;
-    gap: 15px;
-}
-
-.social-link {
+.social-circle {
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    color: #ffffff;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    font-size: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.social-link:hover {
-    background-color: #2563eb;
+.social-circle:hover {
+    background-color: #38bdf8;
+    color: #04244c;
     transform: translateY(-3px);
 }
 
-/* Barra inferior del Footer */
-.footer-bottom {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
+/* Barra de Créditos Inferior */
+.footer-credits {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 0;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.credits-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
-    opacity: 0.7;
 }
 
-.footer-legal {
-    display: flex;
-    gap: 20px;
+.credits-flex p {
+    margin: 0;
 }
 
-.footer-legal a {
-    color: white;
+.credits-links a {
+    color: #94a3b8;
     text-decoration: none;
+    transition: color 0.2s;
 }
 
-.footer-legal a:hover {
-    text-decoration: underline;
+.credits-links a:hover {
+    color: #ffffff;
 }
+
+.separator {
+    margin: 0 8px;
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================
+   OPTIMIZACIÓN PARA CELULARES (MÓVIL) 100% RESPONSIVO
+   ========================================================== */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tabletas */
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .modern-footer {
+        padding-top: 50px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr !important; /* 1 sola columna en celulares */
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-brand, .footer-column {
+        align-items: center; /* Centra todo verticalmente */
+    }
+
+    .footer-logo {
+        margin: 0 auto; /* Centrado estricto */
+    }
+
+    .footer-text-block {
+        align-items: center; /* Centra el texto */
+    }
+
+    .footer-social-media {
+        justify-content: center;
+    }
+
+    .credits-flex {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+}
+
 /* ==========================================================================
    MODAL DE PROMOCIONES (Ventana Emergente Interactiva)
    ========================================================================== */
