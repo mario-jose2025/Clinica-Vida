@@ -211,4 +211,186 @@ function currentSlide(index) {
 setInterval(() => {
     moveSlide(1);
 }, 5000);
+// ==========================================================
+// COMPORTAMIENTO INTELIGENTE DEL HEADER (STICKY-HIDE)
+// ==========================================================
 
+const header = document.querySelector('.header');
+let temporizadorOcultar;
+
+// Función para mostrar el menú
+function mostrarHeader() {
+    if (header) {
+        header.classList.remove('oculto');
+        reiniciarTemporizador(); // Al mostrarlo, volvemos a contar los segundos
+    }
+}
+
+// Función para iniciar el conteo de los 2 segundos para ocultar
+function reiniciarTemporizador() {
+    clearTimeout(temporizadorOcultar); // Limpiamos cualquier conteo previo
+    
+    // Si el usuario está arriba del todo de la página (scroll en 0), no lo ocultamos
+    if (window.scrollY === 0) return;
+
+    // Iniciamos la cuenta regresiva de 2000 milisegundos (2 segundos)
+    temporizadorOcultar = setTimeout(() => {
+        if (header) {
+            header.classList.add('oculto');
+        }
+    }, 2000); 
+}
+
+// Evento 1: Cuando el usuario hace scroll (baja o sube)
+window.addEventListener('scroll', () => {
+    // Si vuelve arriba del todo, forzar que se muestre siempre
+    if (window.scrollY === 0) {
+        mostrarHeader();
+    } else {
+        // Si va bajando, se muestra momentáneamente y activa la cuenta regresiva
+        if (header.classList.contains('oculto')) {
+            header.classList.remove('oculto');
+        }
+        reiniciarTemporizador();
+    }
+});
+
+// Evento 2: Detectar si el puntero del mouse se acerca al borde superior de la pantalla
+window.addEventListener('mousemove', (evento) => {
+    // Si el mouse está a menos de 50 píxeles del borde superior, el menú baja inmediatamente
+    if (evento.clientY <= 50) {
+        mostrarHeader();
+    }
+});
+
+// Arrancar el conteo la primera vez que carga la página
+reiniciarTemporizador();
+
+
+// ==========================================================
+// LÓGICA DINÁMICA DE SERVICIOS (SCRIPT.JS)
+// ==========================================================
+
+// Base de datos local con la info de cada servicio
+const infoServicios = {
+    "consulta-general": {
+        titulo: "Consulta General",
+        descripcion: "La consulta general es el primer paso y el más importante para el cuidado de tu salud. Nuestros médicos generales experimentados están capacitados para evaluar de forma integral tu estado físico, diagnosticar padecimientos comunes y orientarte hacia la prevención de enfermedades crónicas.",
+        imagen: "Imagen/consultageneral.png",
+        incluye: "Evaluación de signos vitales, examen físico completo, historial clínico digital, recetas médicas y lectura de exámenes de laboratorio.",
+        staff: "Médicos generales certificados y con amplia experiencia en atención familiar.",
+        msgWhatsapp: "Hola Clínica Vida, deseo agendar una Consulta General."
+    },
+    "pediatria": {
+        titulo: "Pediatría Especializada",
+        descripcion: "El cuidado de los más pequeños es nuestra prioridad. Nuestro servicio de pediatría ofrece un seguimiento integral del crecimiento y desarrollo de tus hijos, control de vacunas, y tratamiento especializado para enfermedades infantiles en un ambiente cómodo y seguro.",
+        imagen: "Imagen/pediatra.jpg",
+        incluye: "Control de crecimiento y desarrollo, evaluación nutricional, diagnóstico de enfermedades infantiles y orientación de vacunación.",
+        staff: "Pediatras especialistas con alta calidez humana y paciencia para los niños.",
+        msgWhatsapp: "Hola Clínica Vida, deseo agendar una cita de Pediatría."
+    },
+    "cardiologia": {
+        titulo: "Cardiología",
+        descripcion: "Protege el motor de tu vida. Ofrecemos prevención, diagnóstico oportuno y tratamiento de enfermedades del corazón, hipertensión arterial y alteraciones del sistema circulatorio utilizando tecnología médica avanzada para tu tranquilidad.",
+        imagen: "Imagen/cardiologo.jpg",
+        incluye: "Evaluación cardiovascular integral, interpretación de electrocardiogramas, control de hipertensión y riesgo cardíaco.",
+        staff: "Cardiólogos certificados con amplia trayectoria en salud cardiovascular.",
+        msgWhatsapp: "Hola Clínica Vida, deseo agendar una cita de Cardiología."
+    },
+    "laboratorio": {
+        titulo: "Laboratorio Clínico",
+        descripcion: "Resultados rápidos y confiables para un diagnóstico certero. Contamos con equipos automatizados de última generación para procesar tus análisis de sangre, orina y pruebas especiales con los más estrictos estándares de calidad.",
+        imagen: "Imagen/laboratorio2.jpg",
+        incluye: "Exámenes de sangre completos, perfiles lipídicos, pruebas hormonales, análisis generales y entrega de resultados digitales.",
+        staff: "Bioanalistas profesionales y técnicos de laboratorio altamente calificados.",
+        msgWhatsapp: "Hola Clínica Vida, necesito cotizar/agendar exámenes de Laboratorio Clínico."
+    },
+    "ultrasonidos": {
+        titulo: "Ultrasonidos Diagnósticos",
+        descripcion: "Estudios de imagen de alta resolución que permiten evaluar tus órganos internos de forma completamente segura, no invasiva y sin dolor. Ideal para chequeos abdominales, pélvicos, obstétricos y seguimiento médico continuo.",
+        imagen: "Imagen/mujer-ultrasonido.jpg",
+        incluye: "Ultrasonidos en tiempo real, imágenes impresas o digitales, y reporte médico detallado e interpretado al instante.",
+        staff: "Médicos radiólogos y especialistas en diagnóstico por imágenes.",
+        msgWhatsapp: "Hola Clínica Vida, deseo agendar un estudio de Ultrasonido."
+    },
+    "medicina-interna": {
+        titulo: "Medicina Interna",
+        descripcion: "Atención médica experta y científica para el adulto. El internista se especializa en el diagnóstico y manejo clínico de enfermedades complejas, crónicas o múltiples que afectan a los órganos internos (como diabetes o problemas metabólicos).",
+        imagen: "Imagen/medicina-interna.jpg",
+        incluye: "Manejo de enfermedades crónicas, chequeos ejecutivos para adultos, tratamientos médicos multiorgánicos y medicina preventiva.",
+        staff: "Especialistas en Medicina Interna dedicados al cuidado médico del adulto.",
+        msgWhatsapp: "Hola Clínica Vida, deseo agendar una cita de Medicina Interna."
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const botonesVerMas = document.querySelectorAll('.btn-ver-mas');
+    const botonesMenu = document.querySelectorAll('.btn-menu-servicio'); // Para el dropdown si lo activaste
+    const btnVolver = document.getElementById('btn-volver-landing');
+    const pantallaServicio = document.getElementById('pantalla-servicio');
+    
+    // Elementos de la pantalla de detalles que vamos a cambiar dinámicamente
+    const txtTitulo = document.getElementById('detalle-titulo');
+    const txtDescripcion = document.getElementById('detalle-descripcion');
+    const imgServicio = document.getElementById('detalle-imagen');
+    const itemIncluye = document.querySelector('.detalle-item:nth-child(2) p');
+    const itemStaff = document.querySelector('.detalle-item:nth-child(3) p');
+    const linkWhatsapp = document.getElementById('btn-cta-servicio');
+
+    // Secciones de la landing principal a ocultar
+    const seccionesLanding = document.querySelectorAll('main, section, .hero, .hero-section, #inicio, #promociones, #registro, #nosotros, footer');
+
+    // Función que arma la pantalla con el servicio seleccionado
+    function abrirServicio(idServicio) {
+        const datos = infoServicios[idServicio];
+        
+        if (datos) {
+            // Reemplazamos los textos e imágenes con la info del objeto
+            txtTitulo.innerText = datos.titulo;
+            txtDescripcion.innerText = datos.descripcion;
+            imgServicio.src = datos.imagen;
+            imgServicio.alt = datos.titulo;
+            itemIncluye.innerHTML = datos.incluye;
+            itemStaff.innerHTML = datos.staff;
+            
+            // Reemplazamos el enlace de WhatsApp con su mensaje personalizado
+            // RECUERDA: Cambiar el número 50588888888 por tu número real
+            linkWhatsapp.href = `https://wa.me/50588888888?text=${encodeURIComponent(datos.msgWhatsapp)}`;
+
+            // Ocultamos landing y mostramos detalles
+            seccionesLanding.forEach(sec => sec.style.display = 'none');
+            pantallaServicio.classList.add('activa');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // Escuchar clics en los botones "Ver más" de las tarjetas
+    botonesVerMas.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idServicio = btn.getAttribute('data-servicio');
+            abrirServicio(idServicio);
+        });
+    });
+
+    // Escuchar clics en el menú dropdown (opcional)
+    botonesMenu.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita que salte de golpe
+            const idServicio = link.getAttribute('data-servicio');
+            abrirServicio(idServicio);
+        });
+    });
+
+    // Acción al dar clic en "Volver"
+    if (btnVolver) {
+        btnVolver.addEventListener('click', () => {
+            pantallaServicio.classList.remove('activa');
+            seccionesLanding.forEach(sec => sec.style.display = '');
+            
+            const seccionServicios = document.getElementById('servicios');
+            if (seccionServicios) {
+                seccionServicios.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+});

@@ -41,25 +41,43 @@ h1, h2, h3, h4, h5, h6 {
    2. HEADER (MENÚ DE NAVEGACIÓN)
    ========================================================================== */
 
-header {
-    background-color: #0b2c5d; 
-    height: 80px;                
-    padding: 15px 0;         
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999; /* Prioridad ultra alta sobre todo */
+    background-color: #0b2f61; /* Tu azul característico */
+    
+    /* ANIMACIÓN CRUCIAL PARA EL EFECTO: */
+    transition: transform 0.4s ease, opacity 0.3s ease; 
+}
+
+/* Esta clase la pondrá JavaScript automáticamente para esconder el menú */
+.header.oculto {
+    transform: translateY(-100%); /* Lo saca hacia arriba de la pantalla */
+    opacity: 0;
 }
 
 /* Logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: white;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
 }
 
 .logo img {
-    height: 65px;
+    height: 85px;
+    width: auto;
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+/* Efecto premium opcional al pasar el cursor */
+.logo img:hover {
+    transform: scale(1.05);
 }
 
 /* Menú de Enlaces */
@@ -1164,3 +1182,309 @@ header {
         transform: scale(1);
     }
 }
+/* ==========================================================
+   MENÚ DESPLEGABLE DE SERVICIOS (DROPDOWN)
+   ========================================================== */
+
+/* Contenedor padre relativo */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* El botón de Servicios */
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* La tarjeta que se despliega (Oculta por defecto) */
+.dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;          /* Aparece justo pegado debajo de la barra azul */
+    left: 50%;
+    transform: translateX(-50%) translateY(15px); /* Centrado y un pelín abajo */
+    background-color: white !important;
+    min-width: 230px;   /* Ancho ideal para que quepan los textos sin cortarse */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15); /* Sombra elegante */
+    border-radius: 8px;
+    padding: 8px 0;
+    z-index: 9999 !important; /* Prioridad máxima para que flote sobre todo */
+    
+    /* Animación de desvanecimiento suave */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Los enlaces de los servicios dentro de la lista blanca */
+.dropdown-menu a {
+    color: #333333 !important; /* Texto oscuro legible */
+    padding: 12px 20px !important;
+    text-decoration: none !important;
+    display: block !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    text-align: left !important;
+    transition: background-color 0.2s ease, color 0.2s ease !important;
+}
+
+/* Efecto cuando el puntero pasa sobre un servicio específico */
+.dropdown-menu a:hover {
+    background-color: rgba(11, 47, 97, 0.08) !important; /* Fondo azul clarito sutil */
+    color: #0b2f61 !important; /* Letra cambia al azul de tu clínica */
+}
+
+/* ¡LA MAGIA! Al pasar el puntero sobre "Servicios", la lista se revela */
+.dropdown:hover .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important; /* Sube suavemente a su posición */
+}
+/* ==========================================================
+   ESTILOS COMPLEMENTARIOS PARA LA PANTALLA DE DETALLE
+   ========================================================== */
+
+/* Oculta la pantalla por defecto */
+.seccion-detalle-oculta {
+    display: none;
+    padding-top: 130px; 
+    padding-bottom: 80px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+/* JavaScript activará esta clase al hacer clic */
+.seccion-detalle-oculta.activa {
+    display: block !important;
+}
+
+.detalle-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Botón estilizado de Volver */
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;                  /* Espacio entre la flecha y el texto */
+    color: white;               /* Color del texto */
+    background-color: #0b2f61;  /* El azul oscuro de tu clínica */
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 35px;
+    padding: 12px 24px;         /* Espacio interno para que parezca una tableta/botón */
+    border-radius: 30px;        /* Bordes bien redondeados y modernos */
+    box-shadow: 0 4px 10px rgba(11, 47, 97, 0.2); /* Sombra sutil azulada */
+    transition: all 0.3s ease;  /* Animación suave para los cambios */
+}
+
+/* EFECTO CUANDO EL USUARIO PASA EL PUNTERO EN CERRAR/VOLVER */
+.btn-volver:hover {
+    background-color: #504bdc;  /* Cambia a un rojo clínico elegante que indica "cerrar/salir" */
+    transform: translateX(-5px); /* Se mueve un poquito a la izquierda dando sensación de regreso */
+    box-shadow: 0 6px 15px rgba(198, 40, 40, 0.3); /* La sombra se vuelve roja */
+}
+
+
+.btn-volver:hover {
+    transform: translateX(-5px);
+}
+
+/* Grid de información */
+.main-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .main-info { grid-template-columns: 1fr; }
+}
+
+.info-texto h1 {
+    color: #0b2f61;
+    font-size: 38px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.info-texto p {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.info-imagen img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Cuadrícula inferior */
+.detalles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.detalle-item {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid #0b2f61;
+}
+
+.detalle-item h3 {
+    color: #0b2f61;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.detalle-item p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Caja de llamado a la acción */
+.cta-box {
+    background-color: #0b2f61;
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.cta-box h2 { font-size: 28px; margin-bottom: 15px; }
+.cta-box p { font-size: 16px; margin-bottom: 25px; opacity: 0.9; }
+
+.btn-agendar {
+    display: inline-block;
+    background-color: white;
+    color: #0b2f61;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+/* EFECTO HOVER: Se vuelve verde WhatsApp al poner el mouse */
+.btn-agendar:hover {
+    background-color: #25d366 !important;
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+}
+
+/* Estilo uniforme para todos los botones Ver más */
+.btn-ver-mas {
+    background-color: #3077da;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-ver-mas:hover {
+    background-color: #0c367a;
+    transform: scale(1.03);
+}
+/* ==========================================================
+   ANIMACIÓN SCROLL REVEAL (EFECTO DE CARGA SUAVE)
+   ========================================================== */
+
+/* Esta clase se la aplicaremos a los elementos que queremos que aparezcan suavemente */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px); /* Empiezan 40 píxeles más abajo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+/* Esta clase la meterá JavaScript automáticamente cuando el usuario haga scroll y llegue al elemento */
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0); /* Sube a su posición original */
+}
+/* ==========================================================
+   DISEÑO 100% RESPONSIVO (MÓVIL Y TABLETAS)
+   ========================================================== */
+
+/* Esto se activa automáticamente en pantallas menores a 768px (Celulares) */
+@media (max-width: 768px) {
+    
+    /* 1. Ajustes del Contenedor General */
+    .container {
+        width: 90%;
+        padding: 0 15px;
+    }
+
+    /* 2. Cuadrícula de Servicios (Pasan de 3 columnas a 1 sola columna) */
+    .services-grid {
+        grid-template-columns: 1fr !important; /* Se apilan uno abajo del otro */
+        gap: 20px;
+    }
+
+    /* 3. Ajustes de la Pantalla de Detalles Dinámica */
+    .detalle-contenedor {
+        grid-template-columns: 1fr !important; /* La foto pasa arriba y el texto abajo */
+        text-align: center;
+        gap: 25px;
+    }
+
+    .info-imagen img {
+        height: 250px; /* Reducimos la altura de la foto en celular para que no ocupe toda la pantalla */
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .detalle-texto h2 {
+        font-size: 26px; /* Texto un poco más pequeño para que no se corte */
+    }
+
+    .btn-volver {
+        margin-bottom: 20px;
+        width: 100%; /* El botón de volver ocupa todo el ancho para que sea fácil de tocar con el pulgar */
+        justify-content: center;
+    }
+
+    .btn-agendar {
+        display: block;
+        width: 100%; /* El botón de WhatsApp se vuelve gigante y accesible */
+        text-align: center;
+    }
+
+    /* 4. Bloques de Información Inferior (Horarios, Incluye, Staff) */
+    .detalle-extras {
+        grid-template-columns: 1fr !important; /* Se apilan en vertical */
+        gap: 15px;
+    }
+}
+
+
+

@@ -28,12 +28,24 @@
                 <span>Clínica Vida</span>
             </div>
             <nav class="nav">
-                <a href="#inicio">Inicio</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#promociones">Promociones</a>
-                <a href="#registro">Regístrate</a>
-                <a href="#nosotros">Sobre nosotros</a>
-            </nav>
+    <a href="#inicio">Inicio</a>
+    
+    <div class="dropdown">
+        <a href="#servicios" class="dropdown-toggle">Servicios <i class="fas fa-chevron-down" style="font-size: 11px; margin-left: 4px;"></i></a>
+        <div class="dropdown-menu">
+            <a href="#servicios">Consulta general</a>
+            <a href="#servicios">Pediatría</a>
+            <a href="#servicios">Cardiología</a>
+            <a href="#servicios">Laboratorio clínico</a>
+            <a href="#servicios">Ultrasonidos</a>
+            <a href="#servicios">Medicina interna</a>
+        </div>
+    </div>
+    
+    <a href="#promociones">Promociones</a>
+    <a href="#registro">Regístrate</a>
+    <a href="#nosotros">Sobre nosotros</a>
+</nav>
         </div>
     </header>
 <section id="inicio" class="hero-section">
@@ -91,7 +103,6 @@
     </div>
 </section>
 
-
     <section class="services" id="servicios">
         <div class="container">
             <div class="services-header">
@@ -101,56 +112,52 @@
 
             <div class="services-grid">
                 <article class="service-card">
-                    <div class="service-icon">
-                        <img src="Imagen/consultageneral.png" alt="Consulta General">
-                    </div>
-                    <h3>Consulta general</h3>
-                    <p>Evaluación completa de tu estado de salud por médicos generales experimentados</p>
-                </article>
+    <div class="service-icon">
+        <img src="Imagen/doctor.png" alt="Consulta General">
+    </div>
+    <h3>Consulta general</h3>
+    <p>Evaluación completa de tu estado de salud por médicos generales experimentados</p>
+    <button class="btn-ver-mas" data-servicio="consulta-general">Ver más</button>
+</article>
 
                 <article class="service-card">
-                    <div class="service-icon">
-                        <img src="Imagen/pediatria.png" alt="Pediatría">
-                    </div>
-                    <h3>Pediatría</h3>
-                    <p>Atención médica especializada para niños y adolescentes.</p>
-                </article>
+        <div class="service-icon"><img src="Imagen/pediatria.png" alt="Pediatría"></div>
+        <h3>Pediatría</h3>
+        <p>Atención médica especializada para niños y adolescentes.</p>
+        <button class="btn-ver-mas" data-servicio="pediatria">Ver más</button>
+    </article>
 
-                <article class="service-card">
-                    <div class="service-icon">
-                        <img src="Imagen/cardiologia.png" alt="Cardiología">
-                    </div>
-                    <h3>Cardiología</h3>
-                    <p>Diagnóstico y tratamiento de enfermedades del corazón y sistema cardiovascular</p>
-                </article>
+    <article class="service-card">
+        <div class="service-icon"><img src="Imagen/cardiologia.png" alt="Cardiología"></div>
+        <h3>Cardiología</h3>
+        <p>Diagnóstico y tratamiento de enfermedades del corazón y sistema cardiovascular</p>
+        <button class="btn-ver-mas" data-servicio="cardiologia">Ver más</button>
+    </article>
 
-                <article class="service-card">
-                    <div class="service-icon">
-                        <img src="Imagen/laboratorio.png" alt="Laboratorio">
-                    </div>
-                    <h3>Laboratorio clínico</h3>
-                    <p>Realización de exámenes médicos para diagnóstico oportuno. Exámenes de sangre</p>
-                </article>
+    <article class="service-card">
+        <div class="service-icon"><img src="Imagen/laboratorio.png" alt="Laboratorio"></div>
+        <h3>Laboratorio clínico</h3>
+        <p>Realización de exámenes médicos para diagnóstico oportuno. Exámenes de sangre</p>
+        <button class="btn-ver-mas" data-servicio="laboratorio">Ver más</button>
+    </article>
 
-                <article class="service-card">
-                    <div class="service-icon">
-                        <img src="Imagen/ultrasonido.png" alt="Ultrasonidos">
-                    </div>
-                    <h3>Ultrasonidos</h3>
-                    <p>Estudios de imagen no invasivos que permiten evaluar órganos internos de forma segura.</p>
-                </article>
+    <article class="service-card">
+        <div class="service-icon"><img src="Imagen/ultrasonido.png" alt="Ultrasonidos"></div>
+        <h3>Ultrasonidos</h3>
+        <p>Estudios de imagen no invasivos que permiten evaluar órganos internos de forma segura.</p>
+        <button class="btn-ver-mas" data-servicio="ultrasonidos">Ver más</button>
+    </article>
 
-                <article class="service-card">
-                    <div class="service-icon">
-                        <img src="Imagen/medicina.png" alt="Medicina Interna">
-                    </div>
-                    <h3>Medicina interna</h3>
-                    <p>Especialidad médica enfocada en el diagnóstico y manejo de enfermedades en adultos.</p>
-                </article>
-            </div>
+    <article class="service-card">
+        <div class="service-icon"><img src="Imagen/medicina.png" alt="Medicina Interna"></div>
+        <h3>Medicina interna</h3>
+        <p>Especialidad médica enfocada en el diagnóstico y manejo de enfermedades en adultos.</p>
+        <button class="btn-ver-mas" data-servicio="medicina-interna">Ver más</button>
+    </article>
+</div>
         </div>
     </section>
-
+    
     <section class="promotions" id="promociones">
         <div class="container">
             <div class="promo-header">
@@ -409,5 +416,50 @@
 <a href="tel:+50577573241" class="btn-call-flotante" id="btnCallFlotante" title="Llamar a la clínica">
     <i class="fas fa-phone-alt"></i>
 </a>
+    <div id="pantalla-servicio" class="seccion-detalle-oculta">
+        <div class="detalle-container">
+            
+            <button id="btn-volver-landing" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver a la página principal
+            </button>
+
+            <div class="main-info">
+                <div class="info-texto">
+                    <h1 id="detalle-titulo">Consulta General</h1>
+                    <p id="detalle-descripcion">La consulta general es el primer paso y el más importante para el cuidado de tu salud. Nuestros médicos generales experimentados están capacitados para evaluar de forma integral tu estado físico, diagnosticar padecimientos comunes y orientarte hacia la prevención de enfermedades crónicas.</p>
+                    <p>En Clínica Vida nos tomamos el tiempo de escucharte, brindándote una atención cálida, humana y sin prisas.</p>
+                </div>
+                <div class="info-imagen">
+                    <img id="detalle-imagen" src="Imagen/consultageneral.png" alt="Servicio Médico">
+                </div>
+            </div>
+
+            <div class="detalles-grid">
+                <div class="detalle-item">
+                    <h3><i class="fas fa-clock"></i> Horarios de Atención</h3>
+                    <p>Lunes a Viernes: 7:00 AM - 5:00 PM<br>Sábados: 7:00 AM - 12:00 P<br>Domingo  Cerrado</p>
+                </div>
+                <div class="detalle-item">
+                    <h3><i class="fas fa-clipboard-list"></i> ¿Qué incluye?</h3>
+                    <p>Evaluación de signos vitales, examen físico completo, historial clínico digital, recetas médicas y lectura de exámenes de laboratorio.</p>
+                </div>
+                <div class="detalle-item">
+                    <h3><i class="fas fa-user-md"></i> Staff Médico</h3>
+                    <p>Médicos generales certificados y con amplia experiencia en atención familiar y comunitaria.</p>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <h2>¿Necesitas un chequeo médico?</h2>
+                <p>No dejes tu salud para después. Agenda hoy mismo tu consulta con nuestros especialistas.</p>
+               <a href="https://wa.me/50577573241?text=Hola%20Cl%C3%ADnica%20Vida,%20deseo%20agendar%20una%20Consulta%20General." id="btn-cta-servicio" class="btn-agendar" target="_blank">Agendar por WhatsApp <i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
 </body>
 </html>
