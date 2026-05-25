@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
 
-            alert('🎉 ¡Paciente registrado con éxito en la Clínica Vida!');
+            alert('¡Paciente registrado con éxito en la Clínica Vida!');
             formulario.reset(); 
 
         } catch (error) {
             console.error('Error de conexión:', error.message);
-            alert('❌ Hubo un problema al registrar: ' + error.message);
+            alert(' Hubo un problema al registrar: ' + error.message);
         }
 
     });
