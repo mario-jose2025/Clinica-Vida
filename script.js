@@ -350,20 +350,28 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
-    // Escuchar clics en los botones "Ver más" de las tarjetas
+       // Escuchar clics en los botones "Ver más" de las tarjetas
     botonesVerMas.forEach(btn => {
-        // 1. Agregamos el parámetro 'event' aquí adentro
         btn.addEventListener('click', (event) => {
-            // 💥 DETIENE CUALQUIER RECARGA O SALTO POR DEFECTO 💥
             event.preventDefault(); 
-            
-            // 💥 EVITA QUE EL CLICK AFECTE AL SLIDER O AL FONDO DEL HERO 💥
             event.stopPropagation(); 
 
             const idServicio = btn.getAttribute('data-servicio');
             abrirServicio(idServicio);
+
+            // 💥 LA SOLUCIÓN: BAJAR AUTOMÁTICAMENTE HACIA EL DETALLE 💥
+            // Reemplaza '.detalle-contenedor' por la clase o ID real de tu sección de detalles
+            const seccionDetalle = document.querySelector('.detalle-contenedor'); 
+            
+            if (seccionDetalle) {
+                seccionDetalle.scrollIntoView({ 
+                    behavior: 'smooth', // Hace que baje con un deslizamiento suave y elegante
+                    block: 'start'      // Alinea la pantalla justo al inicio de la información
+                });
+            }
         });
     });
+
 
     // Escuchar clics en el menú dropdown (opcional)
     botonesMenu.forEach(link => {
