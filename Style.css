@@ -1502,112 +1502,36 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Esto se activa automáticamente en pantallas menores a 768px (Celulares) */
 @media (max-width: 768px) {
-    
-    /* 1. Ajustes de la Pantalla de Inicio (Hero) */
+
     .hero-section {
-        display: flex !important;
-        flex-direction: column !important;
+        flex-direction: column !important; 
         justify-content: center;
-        align-items: center;
-        padding: 90px 10px 40px 10px !important;
-        height: auto !important;
-        min-height: 100vh;
-    }
-
-    .hero-container {
-        width: 100% !important;
-        padding: 0 5px !important;
-    }
-
-    .hero-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         text-align: center;
-        width: 100% !important;
+        padding: 100px 15px 40px 15px !important; 
+        height: auto !important; 
     }
-
-    /* Ajustar los textos para que no se desborden */
-    .hero-content h1 {
-        font-size: 28px !important; /* Achicamos el título para que quepa en cualquier celular */
-        line-height: 1.2;
-        margin: 15px 0;
-    }
-
-    .hero-description {
-        font-size: 14px !important;
-        line-height: 1.4;
-        padding: 0 10px;
-        margin-bottom: 20px !important;
-    }
-
-    /* 💥 ARREGLO DE LA CAJITA BLANCA (stats-card) 💥 */
-    .stats-card {
-        flex-direction: column !important; /* Cambia de horizontal a VERTICAL */
-        align-items: center !important;
-        width: 100% !important;
-        max-width: 290px; /* Evita que se estire feo a los lados */
-        gap: 15px !important;
-        padding: 15px !important;
-        margin: 0 auto 20px auto !important;
-    }
-
-    /* Escondemos las líneas divisorias que ya no sirven en vertical */
-    .stat-divider {
-        display: none !important; 
-    }
-
-    .stat-item {
-        width: 100% !important;
-        text-align: center;
-    }
-
-    .stat-item h3 {
-        font-size: 24px !important;
-        margin-bottom: 2px !important;
-    }
-
-    /* 💥 ARREGLO DEL BOTÓN REGISTRARSE (cta-row) 💥 */
-    .cta-row {
-        flex-direction: column !important; /* Pone el texto arriba y el botón abajo */
-        gap: 10px !important;
-        width: 100% !important;
-        align-items: center !important;
-    }
-
-    .btn-register {
-        width: 100% !important; /* El botón ocupa todo el ancho disponible para que sea fácil de presionar */
-        max-width: 250px;
-        text-align: center;
-        justify-content: center;
-    }
-
-    /* Ocultar o achicar las flechas del slider en móvil para que no estorben el texto */
-    .slider-btn {
-        display: none !important; /* En celular el usuario desliza con el dedo, quitamos las flechas estorbosas */
-    }
-
-    /* 2. Ajustes del Contenedor General de la página */
+    
+    /* 1. Ajustes del Contenedor General */
     .container {
         width: 90%;
         padding: 0 15px;
     }
 
-    /* 3. Cuadrícula de Servicios (Pasan de 3 columnas a 1 sola columna) */
+    /* 2. Cuadrícula de Servicios (Pasan de 3 columnas a 1 sola columna) */
     .services-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr !important; 
         gap: 20px;
     }
 
-    /* 4. Ajustes de la Pantalla de Detalles Dinámica */
+    /* 3. Ajustes de la Pantalla de Detalles Dinámica */
     .detalle-contenedor {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr !important; 
         text-align: center;
         gap: 25px;
     }
 
     .info-imagen img {
-        height: 250px;
+        height: 250px; 
         width: 100%;
         border-radius: 12px;
     }
@@ -1618,20 +1542,22 @@ h1, h2, h3, h4, h5, h6 {
 
     .btn-volver {
         margin-bottom: 20px;
-        width: 100%;
+        width: 100%; 
         justify-content: center;
     }
 
     .btn-agendar {
         display: block;
-        width: 100%;
+        width: 100%; 
         text-align: center;
     }
 
-    /* 5. Bloques de Información Inferior (Horarios, Incluye, Staff) */
+    /* 4. Bloques de Información Inferior (Horarios, Incluye, Staff) */
     .detalle-extras {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr !important; 
         gap: 15px;
     }
 }
+
+
 
