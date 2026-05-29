@@ -1523,33 +1523,32 @@ h1, h2, h3, h4, h5, h6 {
         margin-bottom: 20px !important;
     }
 
-    /* 💥 LA SOLUCIÓN PARA LA CAJITA BLANCA (stats-card) HORIZONTAL 💥 */
     .stats-card {
         display: flex !important;
-        flex-direction: row !important; /* FORZAMOS A QUE SIGA DE LADO A LADO */
+        flex-direction: row !important; 
         justify-content: space-between !important;
         align-items: center !important;
-        width: 100% !important; /* Ocupa todo el ancho disponible sin salirse */
+        width: 100% !important; 
         max-width: 100% !important; 
-        padding: 10px 5px !important; /* Reducimos el padding interno para ganar espacio */
+        padding: 10px 5px !important; 
         background-color: rgba(255, 255, 255, 0.95) !important;
-        gap: 2px !important; /* Espacio mínimo entre columnas */
+        gap: 2px !important; 
     }
 
     /* Achicamos proporcionalmente los elementos internos para que quepan en celulares angostos */
     .stat-item {
-        flex: 1 !important; /* Distribuye las 3 columnas exactamente igual */
+        flex: 1 !important; 
         text-align: center !important;
     }
 
     .stat-item h3 {
-        font-size: 18px !important; /* Bajamos el tamaño del número (20, 15K, 10+) para que quepa siempre */
+        font-size: 18px !important; 
         margin: 0 !important;
         font-weight: bold;
     }
 
     .stat-item p {
-        font-size: 10px !important; /* Letra más pequeña para las etiquetas en celulares chiquitos */
+        font-size: 10px !important; 
         margin: 0 !important;
         line-height: 1.1;
     }
@@ -1559,13 +1558,13 @@ h1, h2, h3, h4, h5, h6 {
         height: 25px !important;
         width: 1px !important;
         background-color: #ccc !important;
-        display: block !important; /* Asegura que se vea la línea vertical que te gusta */
+        display: block !important; 
     }
 
-    /* 💥 LA SOLUCIÓN PARA LA FILA DEL BOTÓN (cta-row) HORIZONTAL 💥 */
+    
     .cta-row {
         display: flex !important;
-        flex-direction: row !important; /* Sigue en horizontal */
+        flex-direction: row !important; 
         justify-content: space-between !important;
         align-items: center !important;
         width: 100% !important;
@@ -1574,16 +1573,16 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .cta-row p {
-        font-size: 12px !important; /* Texto más pequeño para que no empuje al botón */
+        font-size: 12px !important; 
         text-align: left !important;
         margin: 0 !important;
         flex: 1;
     }
 
     .btn-register {
-        padding: 8px 12px !important; /* Botón un pelo más compacto */
+        padding: 8px 12px !important;
         font-size: 13px !important;
-        white-space: nowrap !important; /* Evita que la palabra "Registrarse" se parta en dos líneas */
+        white-space: nowrap !important; 
     }
 }
 

@@ -314,7 +314,7 @@ const infoServicios = {
 
 document.addEventListener('DOMContentLoaded', () => {
     const botonesVerMas = document.querySelectorAll('.btn-ver-mas');
-    const botonesMenu = document.querySelectorAll('.btn-menu-servicio'); // Para el dropdown si lo activaste
+    const botonesMenu = document.querySelectorAll('.btn-menu-servicio'); 
     const btnVolver = document.getElementById('btn-volver-landing');
     const pantallaServicio = document.getElementById('pantalla-servicio');
     
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
             itemIncluye.innerHTML = datos.incluye;
             itemStaff.innerHTML = datos.staff;
         
-            linkWhatsapp.href = `https://wa.me/50588888888?text=${encodeURIComponent(datos.msgWhatsapp)}`;
+            linkWhatsapp.href = `https://wa.me/50577573241?text=${encodeURIComponent(datos.msgWhatsapp)}`;
 
             // Ocultamos landing y mostramos detalles
             seccionesLanding.forEach(sec => sec.style.display = 'none');
@@ -350,10 +350,16 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
-
     // Escuchar clics en los botones "Ver más" de las tarjetas
     botonesVerMas.forEach(btn => {
-        btn.addEventListener('click', () => {
+        // 1. Agregamos el parámetro 'event' aquí adentro
+        btn.addEventListener('click', (event) => {
+            // 💥 DETIENE CUALQUIER RECARGA O SALTO POR DEFECTO 💥
+            event.preventDefault(); 
+            
+            // 💥 EVITA QUE EL CLICK AFECTE AL SLIDER O AL FONDO DEL HERO 💥
+            event.stopPropagation(); 
+
             const idServicio = btn.getAttribute('data-servicio');
             abrirServicio(idServicio);
         });
