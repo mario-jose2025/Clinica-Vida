@@ -1497,67 +1497,96 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(0); /* Sube a su posición original */
 }
 /* ==========================================================
-   DISEÑO 100% RESPONSIVO (MÓVIL Y TABLETAS)
+   MANTENER DISEÑO HORIZONTAL PERO ESCALADO PARA TODOS LOS MÓVILES
    ========================================================== */
-
-/* Esto se activa automáticamente en pantallas menores a 768px (Celulares) */
 @media (max-width: 768px) {
 
+    /* 1. Mantenemos el contenedor centrado */
     .hero-section {
-        flex-direction: column !important; 
-        justify-content: center;
-        text-align: center;
-        padding: 100px 15px 40px 15px !important; 
-        height: auto !important; 
-    }
-    
-    /* 1. Ajustes del Contenedor General */
-    .container {
-        width: 90%;
-        padding: 0 15px;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-top: 100px !important; /* Espacio para que el menú de arriba no tape el "Bienvenido" */
+        height: auto !important;
+        min-height: 100vh;
     }
 
-    /* 2. Cuadrícula de Servicios (Pasan de 3 columnas a 1 sola columna) */
-    .services-grid {
-        grid-template-columns: 1fr !important; 
-        gap: 20px;
+    /* Reducimos ligeramente el título en pantallas pequeñas para que no empuje todo hacia abajo */
+    .hero-content h1 {
+        font-size: 28px !important; 
+        line-height: 1.2;
     }
 
-    /* 3. Ajustes de la Pantalla de Detalles Dinámica */
-    .detalle-contenedor {
-        grid-template-columns: 1fr !important; 
-        text-align: center;
-        gap: 25px;
+    .hero-description {
+        font-size: 14px !important;
+        line-height: 1.4;
+        margin-bottom: 20px !important;
     }
 
-    .info-imagen img {
-        height: 250px; 
-        width: 100%;
-        border-radius: 12px;
+    /* 💥 LA SOLUCIÓN PARA LA CAJITA BLANCA (stats-card) HORIZONTAL 💥 */
+    .stats-card {
+        display: flex !important;
+        flex-direction: row !important; /* FORZAMOS A QUE SIGA DE LADO A LADO */
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important; /* Ocupa todo el ancho disponible sin salirse */
+        max-width: 100% !important; 
+        padding: 10px 5px !important; /* Reducimos el padding interno para ganar espacio */
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        gap: 2px !important; /* Espacio mínimo entre columnas */
     }
 
-    .detalle-texto h2 {
-        font-size: 26px;
+    /* Achicamos proporcionalmente los elementos internos para que quepan en celulares angostos */
+    .stat-item {
+        flex: 1 !important; /* Distribuye las 3 columnas exactamente igual */
+        text-align: center !important;
     }
 
-    .btn-volver {
-        margin-bottom: 20px;
-        width: 100%; 
-        justify-content: center;
+    .stat-item h3 {
+        font-size: 18px !important; /* Bajamos el tamaño del número (20, 15K, 10+) para que quepa siempre */
+        margin: 0 !important;
+        font-weight: bold;
     }
 
-    .btn-agendar {
-        display: block;
-        width: 100%; 
-        text-align: center;
+    .stat-item p {
+        font-size: 10px !important; /* Letra más pequeña para las etiquetas en celulares chiquitos */
+        margin: 0 !important;
+        line-height: 1.1;
     }
 
-    /* 4. Bloques de Información Inferior (Horarios, Incluye, Staff) */
-    .detalle-extras {
-        grid-template-columns: 1fr !important; 
-        gap: 15px;
+    /* Reducimos la línea divisoria para que no estorbe */
+    .stat-divider {
+        height: 25px !important;
+        width: 1px !important;
+        background-color: #ccc !important;
+        display: block !important; /* Asegura que se vea la línea vertical que te gusta */
+    }
+
+    /* 💥 LA SOLUCIÓN PARA LA FILA DEL BOTÓN (cta-row) HORIZONTAL 💥 */
+    .cta-row {
+        display: flex !important;
+        flex-direction: row !important; /* Sigue en horizontal */
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 10px !important;
+        margin-top: 15px !important;
+    }
+
+    .cta-row p {
+        font-size: 12px !important; /* Texto más pequeño para que no empuje al botón */
+        text-align: left !important;
+        margin: 0 !important;
+        flex: 1;
+    }
+
+    .btn-register {
+        padding: 8px 12px !important; /* Botón un pelo más compacto */
+        font-size: 13px !important;
+        white-space: nowrap !important; /* Evita que la palabra "Registrarse" se parta en dos líneas */
     }
 }
+
 
 
 
