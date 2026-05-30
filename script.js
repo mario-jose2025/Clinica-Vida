@@ -61,7 +61,7 @@ const dots = document.querySelectorAll('.dot');
 const header = document.querySelector('.header');
 let temporizadorOcultar;
 
-// Funciones globales del Carrusel (necesarias si se llaman desde HTML onclick)
+// Funciones globales del Carrusel
 function showSlide(index) {
     if (slides.length === 0) return;
     if (index >= slides.length) currentSlideIndex = 0;
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- INTERACCIÓN 4: LÓGICA DE APERTURA DE SERVICIOS ---
+    // --- INTERACCIÓN 4: LÓGICA DE APERTURA DE SERVICIOS ADAPTADA PARA MÓVILES ---
     function abrirServicio(idServicio) {
         const datos = infoServicios[idServicio];
         
@@ -263,19 +263,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 linkWhatsapp.href = `https://wa.me/50577573241?text=${encodeURIComponent(datos.msgWhatsapp)}`;
             }
 
-            // Ocultamos de forma segura las secciones de la landing principal
-            seccionesLanding.forEach(sec => {
-                if (sec) sec.style.display = 'none';
-            });
-
-            // Forzamos el encendido estructurado de la pantalla de detalles
+            // 1. Forzamos el encendido estructurado de la pantalla de detalles ANTES de ocultar
             if (pantallaServicio) {
                 pantallaServicio.style.display = 'block';
                 pantallaServicio.classList.add('activa');
             }
 
-            // Desplazamos el celular suavemente al encabezado de los detalles
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // 2. Ocultamos de forma segura las secciones de la landing principal
+            seccionesLanding.forEach(sec => {
+                if (sec) sec.style.display = 'none';
+            });
+
+            // 3. Reseteamos el scroll de inmediato al tope absoluto de la pantalla de detalles
+            window.scrollTo(0, 0);
+            if (pantallaServicio) {
+                pantallaServicio.scrollIntoView({ behavior: 'auto', block: 'start' });
+            }
         }
     }
 
