@@ -115,8 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemStaff = document.querySelector('.detalle-item:nth-child(3) p');
     const linkWhatsapp = document.getElementById('btn-cta-servicio');
 
-    // Selector preciso de secciones principales de la landing para evitar colapsos
-    const seccionesLanding = document.querySelectorAll('#inicio, #promociones, #servicios, #registro, #nosotros, main > section:not(#pantalla-servicio), footer');
+// Selector preciso de secciones principales de la landing para evitar colapsos
+   const seccionesLanding = document.querySelectorAll('#inicio, #promociones, #servicios, #registro, #testimonios, #nosotros, main > section:not(#pantalla-servicio), footer');
+
 
     // --- INTERACCIÓN 1: FORMULARIO SUPABASE ---
     if (formulario) {

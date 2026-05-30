@@ -1586,6 +1586,140 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* ==========================================================
+   ESTILOS SECCIÓN TESTIMONIOS
+   ========================================================== */
+.seccion-testimonios {
+    padding: 80px 20px;
+    background-color: #f8fbfb; /* Un fondo grisáceo médico sutil */
+    font-family: 'Poppins', sans-serif; /* O la tipografía de tu proyecto */
+}
+
+.contenedor-testimonios {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonios-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.testimonios-sub {
+    color: #00a896; /* Color verde/turquesa de acento */
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.testimonios-header h2 {
+    color: #028090; /* Tu color principal oscuro */
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.testimonios-header p {
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Distribución de Tarjetas */
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tarjeta-testimonio {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(2, 128, 144, 0.05); /* Sombra médica suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(2, 128, 144, 0.05);
+}
+
+.tarjeta-testimonio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(2, 128, 144, 0.1);
+}
+
+/* Estrellas de Calificación */
+.testimonio-estrellas {
+    color: #ffb703; /* Amarillo dorado limpio */
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.testimonio-texto {
+    color: #4a4a4a;
+    font-size: 15px;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+/* Bloque de Usuario */
+.testimonio-usuario {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid #f0f5f5;
+    padding-top: 20px;
+}
+
+.avatar-usuario img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00a896;
+}
+
+.info-usuario h4 {
+    color: #028090;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+.paciente-verificado {
+    color: #00a896;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ==========================================================
+   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
+   ========================================================== */
+@media (max-width: 768px) {
+    .seccion-testimonios {
+        padding: 50px 15px;
+    }
+    
+    .testimonios-header h2 {
+        font-size: 28px;
+    }
+    
+    .tarjeta-testimonio {
+        padding: 25px;
+    }
+}
+
+
 
 
 
