@@ -1591,7 +1591,7 @@ h1, h2, h3, h4, h5, h6 {
    ========================================================== */
 .seccion-testimonios {
     padding: 80px 20px;
-    background-color: #f8fbfb; /* Un fondo grisáceo médico sutil */
+    background-color: #f3f6f6; /* Un fondo grisáceo médico sutil */
     font-family: 'Poppins', sans-serif; /* O la tipografía de tu proyecto */
 }
 
@@ -1606,7 +1606,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .testimonios-sub {
-    color: #00a896; /* Color verde/turquesa de acento */
+    color: #245296; /* Color verde/turquesa de acento */
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
@@ -1616,7 +1616,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .testimonios-header h2 {
-    color: #028090; /* Tu color principal oscuro */
+    color: #245296; /* Tu color principal oscuro */
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 15px;
@@ -1638,7 +1638,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tarjeta-testimonio {
-    background: #ffffff;
+    background: #c5cae3;
     padding: 35px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(2, 128, 144, 0.05); /* Sombra médica suave */
