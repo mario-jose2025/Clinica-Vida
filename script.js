@@ -369,3 +369,140 @@ window.addEventListener('mousemove', (evento) => {
 
 // Lanzamiento inicial del temporizador del menú
 reiniciarTemporizador();
+
+// ===================================================
+// MOTOR DE RESPUESTAS AUTOMÁTICAS POR PALABRAS CLAVE
+// ===================================================
+
+// Abre y cierra la ventana del chat alternando la clase, y limpia la conversación al cerrar
+function controlarChat() {
+    const ventana = document.getElementById("clinica-chat-window");
+    if (ventana) { 
+        ventana.classList.toggle("chat-oculto"); 
+
+        // Si la ventana se acaba de cerrar (tiene la clase 'chat-oculto'), limpiamos los mensajes
+        if (ventana.classList.contains("chat-oculto")) {
+            const contenedorMensajes = document.getElementById("clinica-chat-body");
+            if (contenedorMensajes) {
+                // Dejamos únicamente la burbuja con el saludo de bienvenida original
+                contenedorMensajes.innerHTML = `
+                    <div class="burbuja msg-bot">
+                        ¡Hola! Bienvenido a <strong>Clínica Vida</strong>. ¿En qué te puedo colaborar hoy? Puedes consultarme por nuestros servicios,  especialidades,  horarios,  dirección y promociones.
+                    </div>
+                `;
+            }
+        }
+    }
+}
+
+// Captura el Enter del teclado
+function detectarTeclaEnter(e) {
+    if (e.key === 'Enter') { procesarEnvioUsuario(); }
+}
+
+function procesarEnvioUsuario() {
+    const cajaTexto = document.getElementById("input-texto-usuario");
+    const textoRaw = cajaTexto.value.trim();
+    if (textoRaw === "") return;
+
+    const contenedorMensajes = document.getElementById("clinica-chat-body");
+
+    // 1. Mostrar el mensaje del usuario en pantalla
+    const burbujaUsuario = document.createElement("div");
+    burbujaUsuario.className = "burbuja msg-usuario";
+    burbujaUsuario.textContent = textoRaw;
+    contenedorMensajes.appendChild(burbujaUsuario);
+
+    // Limpiar la caja de entrada de texto
+    cajaTexto.value = "";
+    contenedorMensajes.scrollTop = contenedorMensajes.scrollHeight;
+
+    // Convertir a minúsculas para buscar palabras clave fácilmente
+    const mensajeMinuscula = textoRaw.toLowerCase();
+    let respuestaBot = "";
+
+    // ===================================================
+    // LÓGICA DE RESPUESTAS POR PALABRAS CLAVE
+    // ===================================================
+    
+    if (mensajeMinuscula.includes("gracias") || mensajeMinuscula.includes("agradezco") || mensajeMinuscula.includes("buena onda") || mensajeMinuscula.includes("ok")) {
+        respuestaBot = `
+            ¡Con muchísimo gusto! Estamos para servirte. Si tienes alguna otra duda sobre <strong>Clínica Vida</strong>, solo dime. ¡Que tengas un excelente día! 😊
+        `;
+    }
+    else if (mensajeMinuscula.includes("hola") || mensajeMinuscula.includes("buenas") || mensajeMinuscula.includes("buenos dias") || mensajeMinuscula.includes("buenas tardes")) {
+        respuestaBot = `
+            ¡Hola! Qué gusto saludarte. Soy el asistente virtual de <strong>Clínica Vida</strong>. <br><br>
+            Te puedo ayudar con información sobre nuestros <strong>servicios</strong>, <strong>especialidades</strong>, <strong>horarios</strong>, <strong>dirección</strong> o las <strong>ofertas</strong> del mes. ¿Qué te gustaría consultar?
+        `;
+    }
+    // SEPARACIÓN 1: LOS 6 SERVICIOS DE APOYO
+    else if (mensajeMinuscula.includes("servicio") || mensajeMinuscula.includes("adicional") || mensajeMinuscula.includes("farmacia") || mensajeMinuscula.includes("laboratorio")) {
+        respuestaBot = `
+            <strong>Nuestros Servicios de Apoyo y Clínicos:</strong><br>
+            1. Laboratorio Clínico 🔬<br>
+            2. Farmacia Interna 💊<br>
+            3. Urgencias 🚑<br>
+            4. Ultrasonidos 🩺<br>
+            5. Rayos X 🩻<br>
+            6. Ambulancia 🚨
+        `;
+    } 
+    // SEPARACIÓN 2: LAS ESPECIALIDADES MÉDICAS
+    else if (mensajeMinuscula.includes("especialidad") || mensajeMinuscula.includes("especialidades") || mensajeMinuscula.includes("atienden") || mensajeMinuscula.includes("médico") || mensajeMinuscula.includes("medico") || mensajeMinuscula.includes("doctor")) {
+        respuestaBot = `
+            <strong>Nuestras Especialidades Médicas:</strong><br>
+            • Medicina General 🩺<br>
+            • Odontología 🦷<br>
+            • Pediatría 👶<br>
+            • Ginecología 🤰
+        `;
+    }
+    else if (mensajeMinuscula.includes("horario") || mensajeMinuscula.includes("hora") || mensajeMinuscula.includes("abren") || mensajeMinuscula.includes("cierran")) {
+        respuestaBot = `
+            <strong>Nuestros Horarios de Atención:</strong><br>
+            • <strong>Lunes a Viernes:</strong> 8:00 AM a 5:00 PM<br>
+            • <strong>Sábados:</strong> 8:00 AM a 12:00 PM<br>
+            • <strong>Domingos:</strong> Cerrado (Solo emergencias graves por urgencias).
+        `;
+    } 
+    else if (mensajeMinuscula.includes("direccion") || mensajeMinuscula.includes("dirección") || mensajeMinuscula.includes("ubicacion") || mensajeMinuscula.includes("ubicación") || mensajeMinuscula.includes("donde") || mensajeMinuscula.includes("dónde")) {
+        respuestaBot = `
+            <strong>Nuestra Ubicación:</strong><br>
+            Estamos ubicados de los semáforos principales 1 cuadra hacia el norte, contiguo a la avenida central. ¡Te esperamos!
+        `;
+    } 
+    // LAS 4 OFERTAS DISPONIBLES
+    else if (mensajeMinuscula.includes("oferta") || mensajeMinuscula.includes("promocion") || mensajeMinuscula.includes("promoción") || mensajeMinuscula.includes("descuento") || mensajeMinuscula.includes("barato")) {
+        respuestaBot = `
+            <strong>🎉 ¡Nuestras 4 Ofertas Disponibles de este Mes! 🎉</strong><br><br>
+            1. <strong>Sonrisa Sana 🦷:</strong> 20% de Descuento en Limpieza Dental Integral + Diagnóstico.<br><br>
+            2. <strong>Chequeo Familiar 🩺:</strong> Consulta de Medicina General a mitad de precio para el segundo miembro de la familia.<br><br>
+            3. <strong>Ruta Escolar 👶:</strong> 15% de Descuento en Evaluaciones Pediátricas de control de crecimiento.<br><br>
+            4. <strong>Perfil Básico 🔬:</strong> 10% de Descuento en exámenes seleccionados de nuestro Laboratorio Clínico.
+        `;
+    } 
+    else if (mensajeMinuscula.includes("cita") || mensajeMinuscula.includes("agendar") || mensajeMinuscula.includes("reservar") || mensajeMinuscula.includes("precio") || mensajeMinuscula.includes("costo") || mensajeMinuscula.includes("cuanto") || mensajeMinuscula.includes("cuánto")) {
+        respuestaBot = `
+            Para agendar una cita o consultar los costos exactos de nuestras consultas, haz clic en el siguiente enlace para comunicarte con nuestro personal de recepción de inmediato:<br><br>
+            <a href='https://wa.me/50577573241' target='_blank' style='display:inline-block; background-color:#25d366; color:white; padding:8px 15px; border-radius:20px; text-decoration:none; font-weight:bold; font-size:13px;'>💬 Agendar por WhatsApp</a>
+        `;
+    } 
+    else {
+        respuestaBot = `
+            No logré entender por completo tu consulta. Pero no te preocupes, puedes consultar sobre nuestros <strong>servicios</strong>, <strong>especialidades</strong>, <strong>horarios</strong> o tocar el siguiente enlace para hablar directo con recepción:<br><br>
+            <a href='https://wa.me/50577573241' target='_blank' style='display:inline-block; background-color:#25d366; color:white; padding:8px 15px; border-radius:20px; text-decoration:none; font-weight:bold; font-size:13px;'>💬 Contactar por WhatsApp</a>
+        `;
+    }
+
+    // 2. Desplegar la respuesta del Bot simulando que está pensando
+    setTimeout(() => {
+        const burbujaBot = document.createElement("div");
+        burbujaBot.className = "burbuja msg-bot";
+        burbujaBot.innerHTML = respuestaBot;
+        contenedorMensajes.appendChild(burbujaBot);
+        
+        // Auto-scroll hacia abajo
+        contenedorMensajes.scrollTop = contenedorMensajes.scrollHeight;
+    }, 450); 
+}

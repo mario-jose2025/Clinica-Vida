@@ -527,6 +527,51 @@
         );
     </script>
     <script src="script.js"></script>
+
+        <!-- ========================================================================= -->
+    <!-- COMPONENTE: CHATBOT FLOTANTE AUTOMATIZADO (INICIA OCULTO)                 -->
+    <!-- ========================================================================= -->
+    
+    <!-- Botón Flotante para abrir el chat -->
+    <div id="clinica-chat-btn" onclick="controlarChat()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+    </div>
+
+    <!-- Ventana de Conversación (Inicia cerrada gracias a la clase chat-oculto) -->
+    <div id="clinica-chat-window" class="chat-oculto">
+        <!-- Encabezado del Chat -->
+        <div id="clinica-chat-header">
+            <div class="chat-perfil-info">
+                <div class="chat-avatar-badge">CV</div>
+                <div>
+                    <div class="chat-nombre-medico">Clínica Vida</div>
+                    <div class="chat-estado-linea">🟢 En línea ahora</div>
+                </div>
+            </div>
+            <!-- Botón X para cerrar la ventana -->
+            <button onclick="controlarChat()" id="btn-cerrar-ventana">&times;</button>
+        </div>
+        
+        <!-- Cuerpo del Chat (Mensajes) -->
+        <div id="clinica-chat-body">
+            <div class="burbuja msg-bot">
+                ¡Hola! Bienvenido a <strong>Clínica Vida</strong>. ¿En qué te puedo colaborar hoy?  Puedes consultarme por nuestros  servicios,  especialidades,  horarios,  dirección y promociones.
+            </div>
+        </div>
+        
+        <!-- Pie del Chat (Entrada de texto) -->
+        <div id="clinica-chat-footer">
+            <input type="text" id="input-texto-usuario" placeholder="Pregúntame lo que quieras..." onkeypress="detectarTeclaEnter(event)">
+            <button onclick="procesarEnvioUsuario()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
     
 </body>
 </html>

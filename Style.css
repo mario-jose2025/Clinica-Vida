@@ -1719,6 +1719,175 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* ========================================== */
+/* ESTILOS DEL CHATBOT - AGREGAR AL FINAL     */
+/* ========================================== */
+
+/* Regla de oro para que inicie oculto */
+.chat-oculto { 
+    display: none !important; 
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+#clinica-chat-btn {
+    position: fixed !important;
+    bottom: 100px !important;
+    right: 25px !important;
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #007bff !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3) !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: transform 0.2s ease !important;
+}
+
+#clinica-chat-btn:hover { 
+    transform: scale(1.1) !important; 
+}
+
+#clinica-chat-btn svg { 
+    width: 28px !important; 
+    height: 28px !important; 
+    fill: white !important; 
+}
+
+#clinica-chat-window {
+    position: fixed !important;
+    bottom: 175px !important;
+    right: 25px !important;
+    width: 340px !important;
+    height: 450px !important;
+    background-color: #ffffff !important;
+    border-radius: 16px !important;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    font-family: Arial, sans-serif !important;
+    z-index: 99999 !important;
+    overflow: hidden !important;
+}
+
+#clinica-chat-header {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    color: white !important;
+    padding: 15px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.chat-perfil-info { 
+    display: flex !important; 
+    align-items: center !important; 
+    gap: 10px !important; 
+}
+
+.chat-avatar-badge {
+    width: 35px !important; 
+    height: 35px !important; 
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50% !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important;
+    font-weight: bold !important; 
+    font-size: 13px !important;
+}
+
+.chat-nombre-medico { 
+    font-weight: bold !important; 
+    font-size: 14px !important; 
+}
+
+.chat-estado-linea { 
+    font-size: 11px !important; 
+    opacity: 0.9 !important; 
+}
+
+#btn-cerrar-ventana { 
+    background: none !important; 
+    border: none !important; 
+    color: white !important; 
+    font-size: 26px !important; 
+    cursor: pointer !important; 
+    line-height: 1 !important; 
+}
+
+#clinica-chat-body { 
+    flex: 1 !important; 
+    padding: 15px !important; 
+    overflow-y: auto !important; 
+    background-color: #f8f9fa !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 12px !important; 
+}
+
+.burbuja { 
+    padding: 11px 15px !important; 
+    border-radius: 16px !important; 
+    max-width: 75% !important; 
+    font-size: 14px !important; 
+    line-height: 1.4 !important; 
+    word-wrap: break-word !important; 
+}
+
+.msg-bot { 
+    background-color: #ffffff !important; 
+    color: #333333 !important; 
+    align-self: flex-start !important; 
+    border-top-left-radius: 4px !important; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important; 
+}
+
+.msg-usuario { 
+    background-color: #007bff !important; 
+    color: white !important; 
+    align-self: flex-end !important; 
+    border-top-right-radius: 4px !important; 
+}
+
+#clinica-chat-footer { 
+    display: flex !important; 
+    padding: 12px !important; 
+    background-color: #ffffff !important; 
+    border-top: 1px solid #eaeaea !important; 
+    gap: 8px !important; 
+}
+
+#input-texto-usuario { 
+    flex: 1 !important; 
+    padding: 10px 14px !important; 
+    border: 1px solid #cccccc !important; 
+    border-radius: 25px !important; 
+    outline: none !important; 
+    font-size: 14px !important; 
+}
+
+#clinica-chat-footer button { 
+    background-color: #007bff !important; 
+    border: none !important; 
+    width: 40px !important; 
+    height: 40px !important; 
+    border-radius: 50% !important; 
+    cursor: pointer !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+}
+
+#clinica-chat-footer button svg { 
+    width: 18px !important; 
+    height: 18px !important; 
+    fill: white !important; 
+}
+
 
 
 
