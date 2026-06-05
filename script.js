@@ -440,12 +440,12 @@ function procesarEnvioUsuario() {
     else if (mensajeMinuscula.includes("servicio") || mensajeMinuscula.includes("adicional") || mensajeMinuscula.includes("farmacia") || mensajeMinuscula.includes("laboratorio")) {
         respuestaBot = `
             <strong>Nuestros Servicios de Apoyo y Clínicos:</strong><br>
-            1. Laboratorio Clínico 🔬<br>
-            2. Farmacia Interna 💊<br>
-            3. Urgencias 🚑<br>
-            4. Ultrasonidos 🩺<br>
-            5. Rayos X 🩻<br>
-            6. Ambulancia 🚨
+            1. Laboratorio Clínico <br>
+            2. Medicina Interna <br>
+            3. Cardiología <br>
+            4. Ultrasonidos <br>
+            5. Pediatría <br>
+            6. Consulta General 
         `;
     } 
     // SEPARACIÓN 2: LAS ESPECIALIDADES MÉDICAS
@@ -453,7 +453,6 @@ function procesarEnvioUsuario() {
         respuestaBot = `
             <strong>Nuestras Especialidades Médicas:</strong><br>
             • Medicina General 🩺<br>
-            • Odontología 🦷<br>
             • Pediatría 👶<br>
             • Ginecología 🤰
         `;
@@ -461,25 +460,26 @@ function procesarEnvioUsuario() {
     else if (mensajeMinuscula.includes("horario") || mensajeMinuscula.includes("hora") || mensajeMinuscula.includes("abren") || mensajeMinuscula.includes("cierran")) {
         respuestaBot = `
             <strong>Nuestros Horarios de Atención:</strong><br>
-            • <strong>Lunes a Viernes:</strong> 8:00 AM a 5:00 PM<br>
-            • <strong>Sábados:</strong> 8:00 AM a 12:00 PM<br>
-            • <strong>Domingos:</strong> Cerrado (Solo emergencias graves por urgencias).
+            • <strong>Lunes a Viernes:</strong> 7:00 AM a 5:00 PM<br>
+            • <strong>Sábados:</strong> 7:00 AM a 12:00 PM<br>
+            • <strong>Domingos:</strong> Cerrado
+            
         `;
     } 
     else if (mensajeMinuscula.includes("direccion") || mensajeMinuscula.includes("dirección") || mensajeMinuscula.includes("ubicacion") || mensajeMinuscula.includes("ubicación") || mensajeMinuscula.includes("donde") || mensajeMinuscula.includes("dónde")) {
         respuestaBot = `
             <strong>Nuestra Ubicación:</strong><br>
-            Estamos ubicados de los semáforos principales 1 cuadra hacia el norte, contiguo a la avenida central. ¡Te esperamos!
+            Estamos ubicados de los semáforos de Linda Vista 1 1/2 c.Abajo. ¡Te esperamos!
         `;
     } 
     // LAS 4 OFERTAS DISPONIBLES
     else if (mensajeMinuscula.includes("oferta") || mensajeMinuscula.includes("promocion") || mensajeMinuscula.includes("promoción") || mensajeMinuscula.includes("descuento") || mensajeMinuscula.includes("barato")) {
         respuestaBot = `
             <strong>🎉 ¡Nuestras 4 Ofertas Disponibles de este Mes! 🎉</strong><br><br>
-            1. <strong>Sonrisa Sana 🦷:</strong> 20% de Descuento en Limpieza Dental Integral + Diagnóstico.<br><br>
-            2. <strong>Chequeo Familiar 🩺:</strong> Consulta de Medicina General a mitad de precio para el segundo miembro de la familia.<br><br>
-            3. <strong>Ruta Escolar 👶:</strong> 15% de Descuento en Evaluaciones Pediátricas de control de crecimiento.<br><br>
-            4. <strong>Perfil Básico 🔬:</strong> 10% de Descuento en exámenes seleccionados de nuestro Laboratorio Clínico.
+            1. <strong>Primera Consulta :</strong> 50% de Descuento en tu primera consulta de medicina general.<br><br>
+            2. <strong>Chequeo Completo :</strong> 30% de descuento este beneficio incluye examenes de laboratorios, hemograma, glucosa, perfil lipido .<br><br>
+            3. <strong>Consulta Pediátrica :</strong> 25% de Descuento en tu primera cita para menores de 18 años.<br><br>
+            4. <strong>Planes Anuales:</strong> 40 % de descuento, Membresia anual con acceso a todos los servicios.
         `;
     } 
     else if (mensajeMinuscula.includes("cita") || mensajeMinuscula.includes("agendar") || mensajeMinuscula.includes("reservar") || mensajeMinuscula.includes("precio") || mensajeMinuscula.includes("costo") || mensajeMinuscula.includes("cuanto") || mensajeMinuscula.includes("cuánto")) {
