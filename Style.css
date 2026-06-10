@@ -1888,6 +1888,64 @@ h1, h2, h3, h4, h5, h6 {
     fill: white !important; 
 }
 
+/* ========================================== */
+/* SECCIÓN Y CONTENEDORES DEL DASHBOARD       */
+/* ========================================== */
+.seccion-dashboard {
+    padding: 60px 20px;
+    background-color: #f8fafd; /* Gris clínico limpio */
+    text-align: center;
+}
+
+.dashboard-contenedor {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.dashboard-badge {
+    background-color: rgba(0, 95, 115, 0.1);
+    color: #005f73;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.dashboard-titulo {
+    color: #2b2d42;
+    font-size: 32px;
+    margin: 5px 0 10px 0;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-descripcion {
+    color: #6c757d;
+    font-size: 16px;
+    margin-bottom: 30px;
+    font-family: Arial, sans-serif;
+}
+
+/* Envoltura Premium con Sombra y Esquinas Redondeadas */
+.dashboard-frame-wrap {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+/* Estilos directos para el cuadro de Power BI */
+.dashboard-frame-wrap iframe {
+    width: 100%;
+    height: 600px; /* Altura ideal sin scrolls molestos */
+    border: none;
+    border-radius: 8px;
+    display: block;
+}
+
 
 
 

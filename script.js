@@ -148,93 +148,116 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
-    let currentPromoId = "";
-    let likesState = { primera_consulta: 0, chequeo_completo: 0, consulta_pediatrica: 0, planes_anuales: 0 };
-    let userHasLiked = { primera_consulta: false, chequeo_completo: false, consulta_pediatrica: false, planes_anuales: false };
+  // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
+let currentPromoId = "";
+let likesState = { primera_consulta: 0, chequeo_completo: 0, consulta_pediatrica: 0, planes_anuales: 0 };
+let userHasLiked = { primera_consulta: false, chequeo_completo: false, consulta_pediatrica: false, planes_anuales: false };
 
-    document.querySelectorAll(".btn-details").forEach(button => {
-        button.addEventListener("click", (e) => {
-            const targetButton = e.currentTarget; 
-            currentPromoId = targetButton.getAttribute("data-promo") || "promo_generica";
-            const title = targetButton.getAttribute("data-title") || "Promoción Especial";
-            const desc = targetButton.getAttribute("data-desc") || "Consulta los detalles.";
+document.querySelectorAll(".btn-details").forEach(button => {
+    button.addEventListener("click", (e) => {
+        const targetButton = e.currentTarget; 
+        currentPromoId = targetButton.getAttribute("data-promo") || "promo_generica";
+        const title = targetButton.getAttribute("data-title") || "Promoción Especial";
+        const desc = targetButton.getAttribute("data-desc") || "Consulta los detalles.";
 
-            if (modalTitle) modalTitle.textContent = title;
-            if (modalDescription) modalDescription.textContent = desc;
+        if (modalTitle) modalTitle.textContent = title;
+        if (modalDescription) modalDescription.textContent = desc;
 
-            if (likesState[currentPromoId] === undefined) likesState[currentPromoId] = 0;
-            if (userHasLiked[currentPromoId] === undefined) userHasLiked[currentPromoId] = false;
+        if (likesState[currentPromoId] === undefined) likesState[currentPromoId] = 0;
+        if (userHasLiked[currentPromoId] === undefined) userHasLiked[currentPromoId] = false;
 
-            if (likeCountSpan) likeCountSpan.textContent = likesState[currentPromoId];
-            
-            if (btnLike) {
-                if (userHasLiked[currentPromoId]) {
-                    btnLike.classList.add("liked");
-                    btnLike.innerHTML = `<i class="fas fa-thumbs-up"></i> Te gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
-                } else {
-                    btnLike.classList.remove("liked");
-                    btnLike.innerHTML = `<i class="far fa-thumbs-up"></i> Me gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
-                }
-            }
-
-            if (commentsList) commentsList.innerHTML = "";
-            if (commentInput) commentInput.value = "";
-            if (modal) modal.style.display = "flex";
-
-            console.log(`[GA4] Evento: ver_promocion | ID: ${currentPromoId}`);
-        });
-    });
-
-    const closeModal = () => { if (modal) modal.style.display = "none"; };
-    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-    window.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-
-    if (btnLike) {
-        btnLike.addEventListener("click", () => {
-            if (!userHasLiked[currentPromoId]) {
-                likesState[currentPromoId]++;
-                userHasLiked[currentPromoId] = true;
-                console.log(`[GA4] Evento: interaccion_promo | Acción: like | ID: ${currentPromoId}`);
-            } else {
-                likesState[currentPromoId]--;
-                userHasLiked[currentPromoId] = false;
-            }
-            
-            const countSpan = document.getElementById("likeCount");
-            if (countSpan) countSpan.textContent = likesState[currentPromoId];
-            btnLike.classList.toggle("liked");
-            
+        if (likeCountSpan) likeCountSpan.textContent = likesState[currentPromoId];
+        
+        if (btnLike) {
             if (userHasLiked[currentPromoId]) {
+                btnLike.classList.add("liked");
                 btnLike.innerHTML = `<i class="fas fa-thumbs-up"></i> Te gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
             } else {
+                btnLike.classList.remove("liked");
                 btnLike.innerHTML = `<i class="far fa-thumbs-up"></i> Me gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
             }
+        }
+
+        if (commentsList) commentsList.innerHTML = "";
+        if (commentInput) commentInput.value = "";
+        if (modal) modal.style.display = "flex";
+
+        // 🔥 EVENTO GA4: Clic en "Ver detalles" (Abre el modal)
+        gtag('event', 'click', {
+            'link_text': 'Ver detalles',
+            'link_id': currentPromoId  // Envía "primera_consulta", "chequeo_completo", etc.
         });
-    }
+        console.log(`[GA4] Evento: ver_promocion | ID: ${currentPromoId}`);
+    });
+});
 
-    if (btnShare) {
-        btnShare.addEventListener("click", () => {
-            alert("¡Enlace de promoción copiado al portapapeles!");
-            console.log(`[GA4] Evento: interaccion_promo | Acción: compartir | ID: ${currentPromoId}`);
+const closeModal = () => { if (modal) modal.style.display = "none"; };
+if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+window.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+if (btnLike) {
+    btnLike.addEventListener("click", () => {
+        if (!userHasLiked[currentPromoId]) {
+            likesState[currentPromoId]++;
+            userHasLiked[currentPromoId] = true;
+            
+            // 🔥 EVENTO GA4: Le dio LIKE dentro del modal
+            gtag('event', 'click', {
+                'link_text': 'Like',
+                'link_id': currentPromoId
+            });
+            console.log(`[GA4] Evento: interaccion_promo | Acción: like | ID: ${currentPromoId}`);
+        } else {
+            likesState[currentPromoId]--;
+            userHasLiked[currentPromoId] = false;
+        }
+        
+        const countSpan = document.getElementById("likeCount");
+        if (countSpan) countSpan.textContent = likesState[currentPromoId];
+        btnLike.classList.toggle("liked");
+        
+        if (userHasLiked[currentPromoId]) {
+            btnLike.innerHTML = `<i class="fas fa-thumbs-up"></i> Te gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
+        } else {
+            btnLike.innerHTML = `<i class="far fa-thumbs-up"></i> Me gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
+        }
+    });
+}
+
+if (btnShare) {
+    btnShare.addEventListener("click", () => {
+        alert("¡Enlace de promoción copiado al portapapeles!");
+        
+        // 🔥 EVENTO GA4: Compartió la promoción
+        gtag('event', 'click', {
+            'link_text': 'Compartir',
+            'link_id': currentPromoId
         });
-    }
+        console.log(`[GA4] Evento: interaccion_promo | Acción: compartir | ID: ${currentPromoId}`);
+    });
+}
 
-    if (btnComment) {
-        btnComment.addEventListener("click", () => {
-            const text = commentInput.value.trim();
-            if (text === "" || !commentsList) return;
+if (btnComment) {
+    btnComment.addEventListener("click", () => {
+        const text = commentInput.value.trim();
+        if (text === "" || !commentsList) return;
 
-            const commentDiv = document.createElement("div");
-            commentDiv.className = "user-comment";
-            commentDiv.innerText = text;
-            commentsList.appendChild(commentDiv);
-            commentInput.value = "";
-            commentsList.scrollTop = commentsList.scrollHeight;
+        const commentDiv = document.createElement("div");
+        commentDiv.className = "user-comment";
+        commentDiv.innerText = text;
+        commentsList.appendChild(commentDiv);
+        commentInput.value = "";
+        commentsList.scrollTop = commentsList.scrollHeight;
 
-            console.log(`[GA4] Evento: interaccion_promo | Acción: comentario | ID: ${currentPromoId}`);
+        // 🔥 EVENTO GA4: Dejó un comentario
+        gtag('event', 'click', {
+            'link_text': 'Comentario',
+            'link_id': currentPromoId
         });
-    }
+        console.log(`[GA4] Evento: interaccion_promo | Acción: comentario | ID: ${currentPromoId}`);
+    });
+}
+
 
     // --- INTERACCIÓN 3: METRICAS DE LLAMADA ---
     if (btnCall) {
