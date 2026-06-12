@@ -324,6 +324,15 @@ if (btnComment) {
             abrirServicio(idServicio);
         });
     });
+    // ── DROPDOWN SERVICIOS EN MÓVIL ──
+const dropdownToggle = document.querySelector('.dropdown-toggle');
+if (dropdownToggle) {
+    dropdownToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        const dropdown = this.closest('.dropdown');
+        dropdown.classList.toggle('active');
+    });
+}
 
     // Botón Volver a la Landing principal
     if (btnVolver) {

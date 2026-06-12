@@ -2112,141 +2112,180 @@ body {
   }
 }
 
-/* ==========================================================================
-   --- REPARACIÓN INTEGRAL: MENÚ HAMBURGUESA SIN HUECOS ---
-   ========================================================================== */
+/* ================================================
+   HEADER Y MENÚ HAMBURGUESA - CLÍNICA VIDA
+   ================================================ */
 
-/* Esconde el cuadrito blanco del checkbox en CUALQUIER pantalla */
 .menu-check-input {
-    display: none !important;
+  display: none !important;
 }
 
-/* Oculta el botón de hamburguesa en computadora */
 .hamburger-icon {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 5px;
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 100001;
 }
 
 .hamburger-icon span {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background-color: #ffffff !important; /* Asegura que sean blancas */
-    border-radius: 2px;
-    transition: all 0.3s ease;
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
-/* --- ESTILOS EXCLUSIVOS PARA CELULARES --- */
+/* ================================================
+   MOBILE - MAX 768PX
+   ================================================ */
 @media (max-width: 768px) {
-    .header .container {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 12px 20px !important;
-        position: relative !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
 
-    /* Muestra las 3 rayas en el cel */
-    .hamburger-icon {
-        display: flex !important;
-    }
+  /* Contenedor principal */
+  .header .container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 20px !important;
+    position: relative !important;
+    flex-wrap: wrap !important;
+  }
 
-    /* El menú vertical que cae ordenado */
-    .header .nav {
-        display: none !important; /* Escondido por defecto hasta tocar las rayas */
-        flex-direction: column !important;
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        width: 100% !important;
-        background-color: #11347a !important;
-        padding: 10px 0 !important;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
-        z-index: 9999 !important;
-        max-height: 80vh !important;
-        overflow-y: auto !important;
-    }
+  /* Mostrar icono hamburguesa */
+  .hamburger-icon {
+    display: flex !important;
+  }
 
-    /* Pestañas base */
-    .header .nav > a, 
-    .header .nav .dropdown {
-        display: block !important;
-        width: 100% !important;
-        padding: 14px 25px !important;
-        box-sizing: border-box !important;
-        text-align: left !important;
-        color: #ffffff !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-        font-size: 14px !important;
-    }
+  /* NAV oculto por defecto */
+  .header .nav {
+    display: none !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #11347a !important;
+    padding: 10px 0 20px !important;
+    margin: 0 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4) !important;
+    z-index: 100000 !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    border-top: 2px solid rgba(255,255,255,0.15) !important;
+  }
 
-    /* ¡MÁGIA! Al tocar el botón, se abre el menú con TODO */
-    .menu-check-input:checked ~ .nav {
-        display: flex !important;
-    }
+  /* NAV visible cuando checkbox está marcado */
+  .menu-check-input:checked ~ .nav {
+    display: flex !important;
+  }
 
-    /* ARREGLO DE SERVICIOS: Se muestran compacto abajo del texto sin huecos */
-    .header .dropdown-menu {
-        display: block !important; /* Se queda visible pero bien integrado */
-        position: relative !important;
-        top: 5px !important;
-        left: 0 !important;
-        transform: none !important;
-        width: 100% !important;
-        box-shadow: none !important;
-        background-color: rgba(0, 0, 0, 0.15) !important;
-        padding: 0 !important;
-        margin: 5px 0 0 0 !important;
-        border-radius: 4px !important;
-    }
+  /* Links principales del nav */
+  .header .nav > a {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 24px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    background: none !important;
+    transition: background 0.2s ease !important;
+  }
 
-    .header .dropdown-menu a {
-        display: block !important;
-        padding: 10px 15px !important;
-        color: #d1d9e6 !important;
-        font-size: 13px !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
-        text-align: left !important;
-    }
+  .header .nav > a:hover {
+    background: rgba(255,255,255,0.08) !important;
+  }
 
-    .header .dropdown-menu a:last-child {
-        border-bottom: none !important;
-    }
+  /* Dashboard destacado */
+  .header .nav .nav-dashboard {
+    background-color: #1a73e8 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    display: block !important;
+    margin: 12px 20px !important;
+    width: calc(100% - 40px) !important;
+    border-radius: 8px !important;
+    padding: 13px 0 !important;
+    font-weight: 700 !important;
+    border-bottom: none !important;
+    font-size: 15px !important;
+  }
 
-    /* BOTÓN DASHBOARD CENTRADO Y METIDO EN MARGEN */
-    .header .nav .nav-dashboard {
-        background-color: #007bff !important;
-        color: #ffffff !important;
-        text-align: center !important;
-        justify-content: center !important;
-        margin: 12px auto !important;
-        width: calc(100% - 40px) !important;
-        border-radius: 6px !important;
-        padding: 12px 0 !important;
-        font-weight: bold !important;
-        border-bottom: none !important;
-    }
+  /* ── DROPDOWN SERVICIOS ── */
+  .header .nav .dropdown {
+    display: block !important;
+    width: 100% !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  }
 
-    /* Animación de la X en el botón */
-    .menu-check-input:checked ~ .hamburger-icon span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-    .menu-check-input:checked ~ .hamburger-icon span:nth-child(2) {
-        opacity: 0;
-    }
-    .menu-check-input:checked ~ .hamburger-icon span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
-    }
+  .header .nav .dropdown-toggle {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 24px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    background: none !important;
+    cursor: pointer !important;
+  }
+
+  .header .dropdown-menu {
+    display: block !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: rgba(0,0,0,0.25) !important;
+    box-shadow: none !important;
+    padding: 4px 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .header .dropdown-menu a {
+    display: block !important;
+    padding: 12px 40px !important;
+    color: #cbd5e1 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    background: none !important;
+  }
+
+  .header .dropdown-menu a:last-child {
+    border-bottom: none !important;
+  }
+
+  .header .dropdown-menu a:hover {
+    background: rgba(255,255,255,0.07) !important;
+    color: #ffffff !important;
+  }
+
+  /* ── ANIMACIÓN X ── */
+  .menu-check-input:checked ~ .hamburger-icon span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .menu-check-input:checked ~ .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .menu-check-input:checked ~ .hamburger-icon span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
 }
+@media (max-width: 768px) {
 
+  .header .dropdown-menu {
+    display: none !important;
+  }
 
-
-
-
-
+  .header .dropdown.active .dropdown-menu {
+    display: block !important;
+  }
+}
