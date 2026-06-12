@@ -2112,6 +2112,141 @@ body {
   }
 }
 
+/* ==========================================================================
+   --- REPARACIÓN INTEGRAL: MENÚ HAMBURGUESA SIN HUECOS ---
+   ========================================================================== */
+
+/* Esconde el cuadrito blanco del checkbox en CUALQUIER pantalla */
+.menu-check-input {
+    display: none !important;
+}
+
+/* Oculta el botón de hamburguesa en computadora */
+.hamburger-icon {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #ffffff !important; /* Asegura que sean blancas */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* --- ESTILOS EXCLUSIVOS PARA CELULARES --- */
+@media (max-width: 768px) {
+    .header .container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 12px 20px !important;
+        position: relative !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Muestra las 3 rayas en el cel */
+    .hamburger-icon {
+        display: flex !important;
+    }
+
+    /* El menú vertical que cae ordenado */
+    .header .nav {
+        display: none !important; /* Escondido por defecto hasta tocar las rayas */
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background-color: #11347a !important;
+        padding: 10px 0 !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
+        z-index: 9999 !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* Pestañas base */
+    .header .nav > a, 
+    .header .nav .dropdown {
+        display: block !important;
+        width: 100% !important;
+        padding: 14px 25px !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        font-size: 14px !important;
+    }
+
+    /* ¡MÁGIA! Al tocar el botón, se abre el menú con TODO */
+    .menu-check-input:checked ~ .nav {
+        display: flex !important;
+    }
+
+    /* ARREGLO DE SERVICIOS: Se muestran compacto abajo del texto sin huecos */
+    .header .dropdown-menu {
+        display: block !important; /* Se queda visible pero bien integrado */
+        position: relative !important;
+        top: 5px !important;
+        left: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        box-shadow: none !important;
+        background-color: rgba(0, 0, 0, 0.15) !important;
+        padding: 0 !important;
+        margin: 5px 0 0 0 !important;
+        border-radius: 4px !important;
+    }
+
+    .header .dropdown-menu a {
+        display: block !important;
+        padding: 10px 15px !important;
+        color: #d1d9e6 !important;
+        font-size: 13px !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+        text-align: left !important;
+    }
+
+    .header .dropdown-menu a:last-child {
+        border-bottom: none !important;
+    }
+
+    /* BOTÓN DASHBOARD CENTRADO Y METIDO EN MARGEN */
+    .header .nav .nav-dashboard {
+        background-color: #007bff !important;
+        color: #ffffff !important;
+        text-align: center !important;
+        justify-content: center !important;
+        margin: 12px auto !important;
+        width: calc(100% - 40px) !important;
+        border-radius: 6px !important;
+        padding: 12px 0 !important;
+        font-weight: bold !important;
+        border-bottom: none !important;
+    }
+
+    /* Animación de la X en el botón */
+    .menu-check-input:checked ~ .hamburger-icon span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-check-input:checked ~ .hamburger-icon span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-check-input:checked ~ .hamburger-icon span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+}
+
+
+
 
 
 
