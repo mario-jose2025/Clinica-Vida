@@ -119,34 +119,50 @@ document.addEventListener('DOMContentLoaded', () => {
    const seccionesLanding = document.querySelectorAll('#inicio, #promociones, #servicios, #registro, #testimonios, #nosotros, main > section:not(#pantalla-servicio), footer');
 
 
-    // --- INTERACCIÓN 1: FORMULARIO SUPABASE ---
-    if (formulario) {
-        formulario.addEventListener('submit', async (evento) => {
-            evento.preventDefault();
-            const datosPaciente = {
-                nombres: document.getElementById('nombres').value,
-                apellidos: document.getElementById('apellidos').value,
-                telefono: document.getElementById('telefono').value,
-                email: document.getElementById('email').value,
-                servicio: document.getElementById('servicio').value,
-                fecha_registro: document.getElementById('fecha').value
-            };
+   // --- INTERACCIÓN 1: FORMULARIO SUPABASE ---
+if (formulario) {
+    formulario.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        const datosPaciente = {
+            nombres: document.getElementById('nombres').value,
+            apellidos: document.getElementById('apellidos').value,
+            telefono: document.getElementById('telefono').value,
+            email: document.getElementById('email').value,
+            servicio: document.getElementById('servicio').value,
+            fecha_registro: document.getElementById('fecha').value
+        };
 
-            try {
-                const { data, error } = await window._supabase
-                    .from('pacientes')
-                    .insert([datosPaciente]);
+        try {
+            const { data, error } = await window._supabase
+                .from('pacientes')
+                .insert([datosPaciente]);
 
-                if (error) throw error;
+            if (error) throw error;
 
-                alert('¡Paciente registrado con éxito en la Clínica Vida!');
-                formulario.reset(); 
-            } catch (error) {
-                console.error('Error de conexión:', error.message);
-                alert('Hubo un problema al registrar: ' + error.message);
-            }
-        });
-    }
+            // 🌟 ALERTA ELEGANTE DE ÉXITO (Reemplaza al alert viejo)
+            Swal.fire({
+                title: '¡Registro Exitoso!',
+                text: '¡Paciente registrado con éxito en la Clínica Vida!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#11347a' // El azul oscuro institucional de tu clínica
+            });
+
+            formulario.reset(); 
+        } catch (error) {
+            console.error('Error de conexión:', error.message);
+            
+            // 🌟 ALERTA ELEGANTE DE ERROR
+            Swal.fire({
+                title: 'Hubo un problema',
+                text: 'No se pudo registrar: ' + error.message,
+                icon: 'error',
+                confirmButtonText: 'Corregir',
+                confirmButtonColor: '#dc3545' // Rojo de advertencia
+            });
+        }
+    });
+}
 
   // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
 let currentPromoId = "";
