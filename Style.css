@@ -2213,16 +2213,14 @@ body {
     border-bottom: none !important;
     font-size: 15px !important;
   }
- /* ==========================================================================
-   --- RESOLUCIÓN FINAL: SUBMENÚ DESPLEGADO COMPLETO EN MÓVIL ---
-   ========================================================================== */
+ /* ================================================
+   MENÚ HAMBURGUESA - CLÍNICA VIDA
+   ================================================ */
 
-/* Escondemos el checkbox del sistema */
 .menu-check-input {
     display: none !important;
 }
 
-/* Ocultamos las 3 rayas en computadora */
 .hamburger-icon {
     display: none;
     cursor: pointer;
@@ -2239,9 +2237,8 @@ body {
     transition: all 0.3s ease;
 }
 
-/* --- FILTRO EXCLUSIVO PARA CELULARES (MÁXIMO 768PX) --- */
 @media (max-width: 768px) {
-    
+
     .header .container {
         display: flex !important;
         justify-content: space-between !important;
@@ -2256,15 +2253,14 @@ body {
         display: flex !important;
     }
 
-    /* Menú vertical base */
     .header .nav {
-        display: none !important; 
+        display: none !important;
         flex-direction: column !important;
         position: absolute !important;
         top: 100% !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #11347a !important; /* Tu azul oscuro real */
+        background-color: #11347a !important;
         padding: 10px 0 !important;
         box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
         z-index: 99999 !important;
@@ -2272,9 +2268,12 @@ body {
         overflow-y: auto !important;
     }
 
-    /* Estilo de los enlaces principales hacia abajo */
-    .header .nav > a, 
-    .header .nav .dropdown {
+    .menu-check-input:checked ~ .nav {
+        display: flex !important;
+    }
+
+    /* Enlaces principales */
+    .header .nav > a {
         display: block !important;
         width: 100% !important;
         padding: 14px 25px !important;
@@ -2282,72 +2281,106 @@ body {
         text-align: left !important;
         color: #ffffff !important;
         text-decoration: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
         font-size: 15px !important;
+        background: none !important;
     }
 
-    /* Mostrar menú al activar checkbox */
-    .menu-check-input:checked ~ .nav {
-        display: flex !important;
+    .header .nav > a:hover {
+        background: rgba(255,255,255,0.08) !important;
     }
 
-    /* ==========================================================================
-       SOLUCIÓN REAL A LOS SERVICIOS VISIBLES (MIRA ESTA PARTE)
-       ========================================================================== */
-    .header .nav .dropdown-menu {
-        display: flex !important;       /* Lo forzamos a existir como lista */
-        flex-direction: column !important;
-        position: relative !important;  /* Destruye el 'absolute' de la PC */
-        top: 0 !important;
-        left: 0 !important;
-        transform: none !important;
-        width: 100% !important;
-        background-color: rgba(0, 0, 0, 0.18) !important; /* Fondo oscuro de contraste */
-        box-shadow: none !important;
-        padding: 6px 0 !important;
-        margin: 10px 0 0 0 !important;
-        border-radius: 4px !important;
-        visibility: visible !important; /* Resetea cualquier bloqueo */
-        opacity: 1 !important;
-    }
-
-    /* Estilos súper estrictos para los enlaces de adentro del submenú */
-    .header .nav .dropdown-menu a {
+    /* Dashboard igual que los otros enlaces */
+    .header .nav .nav-dashboard {
         display: block !important;
         width: 100% !important;
-        padding: 12px 30px !important; /* Sangría hacia la derecha elegante */
-        color: #ffffff !important;     /* ¡TEXTO BLANCO FORZADO! */
-        font-size: 14px !important;    /* Tamaño ideal para celulares */
+        padding: 14px 25px !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+        background: none !important;
+        text-align: left !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Dropdown contenedor */
+    .header .nav .dropdown {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+    }
+
+    /* Botón Servicios */
+    .header .nav .dropdown-toggle {
+        display: block !important;
+        width: 100% !important;
+        padding: 14px 25px !important;
+        color: #ffffff !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        background: none !important;
+        cursor: pointer !important;
         text-decoration: none !important;
         text-align: left !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+    }
+
+    /* Submenú OCULTO por defecto */
+    .header .nav .dropdown-menu {
+        display: none !important;
+        position: static !important;
+        width: 100% !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: none !important;
+    }
+
+    /* Submenú VISIBLE al tocar Servicios */
+    .header .nav .dropdown.active .dropdown-menu {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        overflow: visible !important;
         visibility: visible !important;
         opacity: 1 !important;
+        background-color: rgba(0,0,0,0.25) !important;
+        padding: 6px 0 !important;
+        margin: 0 !important;
     }
 
-    .header .nav .dropdown-menu a:last-child {
-        border-bottom: none !important;
-    }
-
-    /* ========================================================================== */
-
-    /* Dashboard Centrado */
-    .header .nav .nav-dashboard {
-        background-color: #007bff !important;
+    .header .nav .dropdown.active .dropdown-menu a {
+        display: block !important;
+        width: 100% !important;
+        padding: 12px 40px !important;
         color: #ffffff !important;
-        text-align: center !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        margin: 15px auto 5px auto !important;
-        width: calc(100% - 40px) !important;
-        border-radius: 6px !important;
-        padding: 12px 0 !important;
-        font-weight: bold !important;
+        font-size: 14px !important;
+        text-decoration: none !important;
+        text-align: left !important;
+        border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+        background: none !important;
+    }
+
+    .header .nav .dropdown.active .dropdown-menu a:last-child {
         border-bottom: none !important;
     }
 
-    /* Animación de la X */
+    .header .nav .dropdown.active .dropdown-menu a:hover {
+        background: rgba(255,255,255,0.08) !important;
+    }
+
+    /* Animación X */
     .menu-check-input:checked ~ .hamburger-icon span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
@@ -2360,6 +2393,5 @@ body {
 }
 
 }
- 
 
   
