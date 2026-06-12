@@ -198,12 +198,12 @@ document.querySelectorAll(".btn-details").forEach(button => {
         if (commentInput) commentInput.value = "";
         if (modal) modal.style.display = "flex";
 
-        // 🔥 EVENTO GA4: Clic en "Ver detalles" (Abre el modal)
-        gtag('event', 'click', {
-            'link_text': 'Ver detalles',
-            'link_id': currentPromoId  // Envía "primera_consulta", "chequeo_completo", etc.
+               // 🔥 EVENTO GA4 CORREGIDO: Evento específico para abrir el modal de promoción
+        gtag('event', 'abrir_promocion', {
+            'promo_id': currentPromoId,  // Envía "primera_consulta", "chequeo_completo", etc.
+            'texto_enlace': 'Ver detalles'
         });
-        console.log(`[GA4] Evento: ver_promocion | ID: ${currentPromoId}`);
+        console.log(`[GA4] Evento: abrir_promocion | ID: ${currentPromoId}`);
     });
 });
 
@@ -217,12 +217,12 @@ if (btnLike) {
             likesState[currentPromoId]++;
             userHasLiked[currentPromoId] = true;
             
-            // 🔥 EVENTO GA4: Le dio LIKE dentro del modal
-            gtag('event', 'click', {
-                'link_text': 'Like',
-                'link_id': currentPromoId
+            // 🔥 EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Like)
+            gtag('event', 'interaccion_modal', {
+                'tipo_accion': 'Like',
+                'promo_id': currentPromoId
             });
-            console.log(`[GA4] Evento: interaccion_promo | Acción: like | ID: ${currentPromoId}`);
+            console.log(`[GA4] Evento: interaccion_modal | Acción: Like | ID: ${currentPromoId}`);
         } else {
             likesState[currentPromoId]--;
             userHasLiked[currentPromoId] = false;
@@ -244,12 +244,12 @@ if (btnShare) {
     btnShare.addEventListener("click", () => {
         alert("¡Enlace de promoción copiado al portapapeles!");
         
-        // 🔥 EVENTO GA4: Compartió la promoción
-        gtag('event', 'click', {
-            'link_text': 'Compartir',
-            'link_id': currentPromoId
+        // 🔥 EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Compartir)
+        gtag('event', 'interaccion_modal', {
+            'tipo_accion': 'Compartir',
+            'promo_id': currentPromoId
         });
-        console.log(`[GA4] Evento: interaccion_promo | Acción: compartir | ID: ${currentPromoId}`);
+        console.log(`[GA4] Evento: interaccion_modal | Acción: Compartir | ID: ${currentPromoId}`);
     });
 }
 
@@ -265,14 +265,34 @@ if (btnComment) {
         commentInput.value = "";
         commentsList.scrollTop = commentsList.scrollHeight;
 
-        // 🔥 EVENTO GA4: Dejó un comentario
-        gtag('event', 'click', {
-            'link_text': 'Comentario',
-            'link_id': currentPromoId
+        // 🔥 EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Comentario)
+        gtag('event', 'interaccion_modal', {
+            'tipo_accion': 'Comentario',
+            'promo_id': currentPromoId
         });
-        console.log(`[GA4] Evento: interaccion_promo | Acción: comentario | ID: ${currentPromoId}`);
+        console.log(`[GA4] Evento: interaccion_modal | Acción: Comentario | ID: ${currentPromoId}`);
     });
 }
+
+// =========================================================================
+// 🚀 NUEVOS RASTREOS OBLIGATORIOS PARA TU GRÁFICO (PUNTO 7)
+// =========================================================================
+
+// A) Medir clics en los enlaces de la Campaña (Botón de WhatsApp de la sección campaña)
+const btnCampañaWhatsapp = document.querySelector(".campaña-seccion .card-cta");
+if (btnCampañaWhatsapp) {
+    btnCampañaWhatsapp.addEventListener("click", () => {
+        gtag('event', 'clic_campana_whatsapp', {
+            'seccion': 'Campaña Tu Bienestar Primero',
+            'destino': 'WhatsApp Clinica'
+        });
+        console.log("[GA4] Evento enviado: clic_campana_whatsapp");
+    });
+}
+
+// B) Medir la Alerta / Ventana Emergente de Registro Exitoso (Pon esto justo debajo de tu Swal.fire de éxito)
+// Cuando pongas el Swal.fire del formulario, añades esta línea adentro de su lógica:
+// gtag('event', 'registro_exitoso_modal', { 'estado': 'Completado' });
 
 
     // --- INTERACCIÓN 3: METRICAS DE LLAMADA ---
