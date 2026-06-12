@@ -324,6 +324,7 @@ if (btnComment) {
             abrirServicio(idServicio);
         });
     });
+
     // ── DROPDOWN SERVICIOS EN MÓVIL ──
 const dropdownToggle = document.querySelector('.dropdown-toggle');
 if (dropdownToggle) {
@@ -333,6 +334,21 @@ if (dropdownToggle) {
         dropdown.classList.toggle('active');
     });
 }
+
+// ── CERRAR MENÚ AL HACER CLIC EN CUALQUIER ENLACE ──
+const menuCheck = document.getElementById('menu-btn-check');
+const todosLosLinks = document.querySelectorAll('.nav > a, .nav .dropdown-menu a');
+
+todosLosLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Cierra el menú hamburguesa
+        if (menuCheck) menuCheck.checked = false;
+        // Cierra el dropdown de servicios
+        const dropdown = document.querySelector('.dropdown');
+        if (dropdown) dropdown.classList.remove('active');
+    });
+});
+   
 
     // Botón Volver a la Landing principal
     if (btnVolver) {

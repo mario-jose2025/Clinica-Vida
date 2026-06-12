@@ -2289,3 +2289,19 @@ body {
     display: block !important;
   }
 }
+
+@media (max-width: 768px) {
+  .header .dropdown-menu {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .header .dropdown.active .dropdown-menu {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
