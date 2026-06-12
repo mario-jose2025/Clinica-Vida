@@ -30,7 +30,7 @@ const infoServicios = {
         titulo: "Laboratorio Clínico",
         descripcion: "Resultados rápidos y confiables para un diagnóstico certero. Contamos con equipos automatizados de última generación para procesar tus análisis de sangre, orina y pruebas especiales con los más estrictos estándares de calidad.",
         imagen: "Imagen/laboratorio2.jpg",
-        incluye: "Exámenes de sangre completos, perfiles lipídicos, pruebas hormonales, análisis generales y entrega de resultados digitales.",
+        incluye: "Perfil Reumático , Perfil Hepático, Perfil Lípido y Perfil chequeo médico. ",
         staff: "Bioanalistas profesionales y técnicos de laboratorio altamente calificados.",
         msgWhatsapp: "Hola Clínica Vida, necesito cotizar/agendar exámenes de Laboratorio Clínico."
     },
@@ -145,7 +145,7 @@ if (formulario) {
                 text: '¡Paciente registrado con éxito en la Clínica Vida!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#11347a' // El azul oscuro institucional de tu clínica
+                confirmButtonColor: '#11347a' 
             });
 
             formulario.reset(); 
@@ -158,7 +158,7 @@ if (formulario) {
                 text: 'No se pudo registrar: ' + error.message,
                 icon: 'error',
                 confirmButtonText: 'Corregir',
-                confirmButtonColor: '#dc3545' // Rojo de advertencia
+                confirmButtonColor: '#dc3545' 
             });
         }
     });
@@ -166,8 +166,8 @@ if (formulario) {
 
   // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
 let currentPromoId = "";
-let likesState = { primera_consulta: 0, chequeo_completo: 0, consulta_pediatrica: 0, planes_anuales: 0 };
-let userHasLiked = { primera_consulta: false, chequeo_completo: false, consulta_pediatrica: false, planes_anuales: false };
+let likesState = { primera_consulta: 0, chequeo_completo: 0, combo_medicina_interna: 0, Chequeo_combo: 0 };
+let userHasLiked = { primera_consulta: false, chequeo_completo: false, combo_medicina_interna: false, Chequeo_combo: false };
 
 document.querySelectorAll(".btn-details").forEach(button => {
     button.addEventListener("click", (e) => {
@@ -542,8 +542,8 @@ function procesarEnvioUsuario() {
             <strong>🎉 ¡Nuestras 4 Ofertas Disponibles de este Mes! 🎉</strong><br><br>
             1. <strong>Primera Consulta :</strong> 50% de Descuento en tu primera consulta de medicina general.<br><br>
             2. <strong>Chequeo Completo :</strong> 30% de descuento este beneficio incluye examenes de laboratorios, hemograma, glucosa, perfil lipido .<br><br>
-            3. <strong>Consulta Pediátrica :</strong> 25% de Descuento en tu primera cita para menores de 18 años.<br><br>
-            4. <strong>Planes Anuales:</strong> 40 % de descuento, Membresia anual con acceso a todos los servicios.
+            3. <strong>Combo Medicina Interna :</strong> Combo que incluye consulta especializada y exámenes médicos.<br><br>
+            4. <strong>Combo Chequeo Médico :</strong> Paquete combinado de servicios médicos.<br><br>
         `;
     } 
     else if (mensajeMinuscula.includes("cita") || mensajeMinuscula.includes("agendar") || mensajeMinuscula.includes("reservar") || mensajeMinuscula.includes("precio") || mensajeMinuscula.includes("costo") || mensajeMinuscula.includes("cuanto") || mensajeMinuscula.includes("cuánto")) {
