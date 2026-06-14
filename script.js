@@ -265,7 +265,7 @@ if (btnComment) {
         commentInput.value = "";
         commentsList.scrollTop = commentsList.scrollHeight;
 
-        // 🔥 EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Comentario)
+        // EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Comentario)
         gtag('event', 'interaccion_modal', {
             'tipo_accion': 'Comentario',
             'promo_id': currentPromoId
@@ -275,7 +275,7 @@ if (btnComment) {
 }
 
 // =========================================================================
-// 🚀 NUEVOS RASTREOS OBLIGATORIOS PARA TU GRÁFICO (PUNTO 7)
+// NUEVOS RASTREOS 
 // =========================================================================
 
 // A) Medir clics en los enlaces de la Campaña (Botón de WhatsApp de la sección campaña)
@@ -290,9 +290,6 @@ if (btnCampañaWhatsapp) {
     });
 }
 
-// B) Medir la Alerta / Ventana Emergente de Registro Exitoso (Pon esto justo debajo de tu Swal.fire de éxito)
-// Cuando pongas el Swal.fire del formulario, añades esta línea adentro de su lógica:
-// gtag('event', 'registro_exitoso_modal', { 'estado': 'Completado' });
 
 
     // --- INTERACCIÓN 3: METRICAS DE LLAMADA ---
