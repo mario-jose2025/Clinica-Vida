@@ -164,7 +164,7 @@ if (formulario) {
     });
 }
 
-  // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
+ // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
 let currentPromoId = "";
 let likesState = { primera_consulta: 0, chequeo_completo: 0, combo_medicina_interna: 0, Chequeo_combo: 0 };
 let userHasLiked = { primera_consulta: false, chequeo_completo: false, combo_medicina_interna: false, Chequeo_combo: false };
@@ -198,12 +198,11 @@ document.querySelectorAll(".btn-details").forEach(button => {
         if (commentInput) commentInput.value = "";
         if (modal) modal.style.display = "flex";
 
-               // 🔥 EVENTO GA4 CORREGIDO: Evento específico para abrir el modal de promoción
-        gtag('event', 'abrir_promocion', {
-            'promo_id': currentPromoId,  // Envía "primera_consulta", "chequeo_completo", etc.
+        // 🔥 SOLUCIÓN DEFINITIVA PARA POWER BI: Envía el ID directamente en el nombre del evento
+        gtag('event', `promo_${currentPromoId}`, {
             'texto_enlace': 'Ver detalles'
         });
-        console.log(`[GA4] Evento: abrir_promocion | ID: ${currentPromoId}`);
+        console.log(`[GA4] Evento registrado: promo_${currentPromoId}`);
     });
 });
 
@@ -217,12 +216,11 @@ if (btnLike) {
             likesState[currentPromoId]++;
             userHasLiked[currentPromoId] = true;
             
-            // 🔥 EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Like)
-            gtag('event', 'interaccion_modal', {
-                'tipo_accion': 'Like',
-                'promo_id': currentPromoId
+            // 🔥 Interacción de "Like" rastreada de forma individualizada para cada promoción
+            gtag('event', `like_${currentPromoId}`, {
+                'tipo_accion': 'Like'
             });
-            console.log(`[GA4] Evento: interaccion_modal | Acción: Like | ID: ${currentPromoId}`);
+            console.log(`[GA4] Evento: like_${currentPromoId} | Acción: Like`);
         } else {
             likesState[currentPromoId]--;
             userHasLiked[currentPromoId] = false;
@@ -244,12 +242,11 @@ if (btnShare) {
     btnShare.addEventListener("click", () => {
         alert("¡Enlace de promoción copiado al portapapeles!");
         
-        // 🔥 EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Compartir)
-        gtag('event', 'interaccion_modal', {
-            'tipo_accion': 'Compartir',
-            'promo_id': currentPromoId
+        // 🔥 Interacción de "Compartir" vinculada directamente a la promoción correspondiente
+        gtag('event', `compartir_${currentPromoId}`, {
+            'tipo_accion': 'Compartir'
         });
-        console.log(`[GA4] Evento: interaccion_modal | Acción: Compartir | ID: ${currentPromoId}`);
+        console.log(`[GA4] Evento: compartir_${currentPromoId} | Acción: Compartir`);
     });
 }
 
@@ -265,12 +262,11 @@ if (btnComment) {
         commentInput.value = "";
         commentsList.scrollTop = commentsList.scrollHeight;
 
-        // EVENTO GA4 CORREGIDO: Interacción dentro de la ventana emergente (Comentario)
-        gtag('event', 'interaccion_modal', {
-            'tipo_accion': 'Comentario',
-            'promo_id': currentPromoId
+        // 🔥 Interacción de "Comentario" vinculada directamente a la promoción correspondiente
+        gtag('event', `comentario_${currentPromoId}`, {
+            'tipo_accion': 'Comentario'
         });
-        console.log(`[GA4] Evento: interaccion_modal | Acción: Comentario | ID: ${currentPromoId}`);
+        console.log(`[GA4] Evento: comentario_${currentPromoId} | Acción: Comentario`);
     });
 }
 
