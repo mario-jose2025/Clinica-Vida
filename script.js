@@ -115,178 +115,194 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemStaff = document.querySelector('.detalle-item:nth-child(3) p');
     const linkWhatsapp = document.getElementById('btn-cta-servicio');
 
-// Selector preciso de secciones principales de la landing para evitar colapsos
-   const seccionesLanding = document.querySelectorAll('#inicio, #promociones, #servicios, #registro, #testimonios, #nosotros, main > section:not(#pantalla-servicio), footer');
+    // Selector preciso de secciones principales de la landing para evitar colapsos
+    const seccionesLanding = document.querySelectorAll('#inicio, #promociones, #servicios, #registro, #testimonios, #nosotros, main > section:not(#pantalla-servicio), footer');
 
 
-   // --- INTERACCIÓN 1: FORMULARIO SUPABASE ---
-if (formulario) {
-    formulario.addEventListener('submit', async (evento) => {
-        evento.preventDefault();
-        const datosPaciente = {
-            nombres: document.getElementById('nombres').value,
-            apellidos: document.getElementById('apellidos').value,
-            telefono: document.getElementById('telefono').value,
-            email: document.getElementById('email').value,
-            servicio: document.getElementById('servicio').value,
-            fecha_registro: document.getElementById('fecha').value
-        };
+    // --- INTERACCIÓN 1: FORMULARIO SUPABASE ---
+    if (formulario) {
+        formulario.addEventListener('submit', async (evento) => {
+            evento.preventDefault();
+            const datosPaciente = {
+                nombres: document.getElementById('nombres').value,
+                apellidos: document.getElementById('apellidos').value,
+                telefono: document.getElementById('telefono').value,
+                email: document.getElementById('email').value,
+                servicio: document.getElementById('servicio').value,
+                fecha_registro: document.getElementById('fecha').value
+            };
 
-        try {
-            const { data, error } = await window._supabase
-                .from('pacientes')
-                .insert([datosPaciente]);
+            try {
+                const { data, error } = await window._supabase
+                    .from('pacientes')
+                    .insert([datosPaciente]);
 
-            if (error) throw error;
+                if (error) throw error;
 
-            // 🌟 ALERTA ELEGANTE DE ÉXITO (Reemplaza al alert viejo)
-            Swal.fire({
-                title: '¡Registro Exitoso!',
-                text: '¡Paciente registrado con éxito en la Clínica Vida!',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#11347a' 
-            });
+                // 🌟 ALERTA ELEGANTE DE ÉXITO
+                Swal.fire({
+                    title: '¡Registro Exitoso!',
+                    text: '¡Paciente registrado con éxito en la Clínica Vida!',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#11347a' 
+                });
 
-            formulario.reset(); 
-        } catch (error) {
-            console.error('Error de conexión:', error.message);
+                formulario.reset(); 
+            } catch (error) {
+                console.error('Error de conexión:', error.message);
+                
+                // 🌟 ALERTA ELEGANTE DE ERROR
+                Swal.fire({
+                    title: 'Hubo un problema',
+                    text: 'No se pudo registrar: ' + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Corregir',
+                    confirmButtonColor: '#dc3545' 
+                });
+            }
+        });
+    }
+
+    // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
+    let currentPromoId = "";
+    let likesState = { primera_consulta: 0, chequeo_completo: 0, combo_medicina_interna: 0, Chequeo_combo: 0 };
+    let userHasLiked = { primera_consulta: false, chequeo_completo: false, combo_medicina_interna: false, Chequeo_combo: false };
+
+    document.querySelectorAll(".btn-details").forEach(button => {
+        button.addEventListener("click", (e) => {
+            const targetButton = e.currentTarget; 
+            currentPromoId = targetButton.getAttribute("data-promo") || "promo_generica";
+            const title = targetButton.getAttribute("data-title") || "Promoción Especial";
+            const desc = targetButton.getAttribute("data-desc") || "Consulta los detalles.";
+
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalDescription) modalDescription.textContent = desc;
+
+            if (likesState[currentPromoId] === undefined) likesState[currentPromoId] = 0;
+            if (userHasLiked[currentPromoId] === undefined) userHasLiked[currentPromoId] = false;
+
+            if (likeCountSpan) likeCountSpan.textContent = likesState[currentPromoId];
             
-            // 🌟 ALERTA ELEGANTE DE ERROR
-            Swal.fire({
-                title: 'Hubo un problema',
-                text: 'No se pudo registrar: ' + error.message,
-                icon: 'error',
-                confirmButtonText: 'Corregir',
-                confirmButtonColor: '#dc3545' 
+            if (btnLike) {
+                if (userHasLiked[currentPromoId]) {
+                    btnLike.classList.add("liked");
+                    btnLike.innerHTML = `<i class="fas fa-thumbs-up"></i> Te gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
+                } else {
+                    btnLike.classList.remove("liked");
+                    btnLike.innerHTML = `<i class="far fa-thumbs-up"></i> Me gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
+                }
+            }
+
+            if (commentsList) commentsList.innerHTML = "";
+            if (commentInput) commentInput.value = "";
+            if (modal) modal.style.display = "flex";
+
+            // 🔥 SOLUCIÓN DEFINITIVA PARA POWER BI: Envía el ID directamente en el nombre del evento
+            gtag('event', `promo_${currentPromoId}`, {
+                'texto_enlace': 'Ver detalles'
             });
-        }
+            console.log(`[GA4] Evento registrado: promo_${currentPromoId}`);
+        });
     });
-}
 
- // --- INTERACCIÓN 2: MODAL DE PROMOCIONES ---
-let currentPromoId = "";
-let likesState = { primera_consulta: 0, chequeo_completo: 0, combo_medicina_interna: 0, Chequeo_combo: 0 };
-let userHasLiked = { primera_consulta: false, chequeo_completo: false, combo_medicina_interna: false, Chequeo_combo: false };
+    const closeModal = () => { if (modal) modal.style.display = "none"; };
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+    window.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
 
-document.querySelectorAll(".btn-details").forEach(button => {
-    button.addEventListener("click", (e) => {
-        const targetButton = e.currentTarget; 
-        currentPromoId = targetButton.getAttribute("data-promo") || "promo_generica";
-        const title = targetButton.getAttribute("data-title") || "Promoción Especial";
-        const desc = targetButton.getAttribute("data-desc") || "Consulta los detalles.";
-
-        if (modalTitle) modalTitle.textContent = title;
-        if (modalDescription) modalDescription.textContent = desc;
-
-        if (likesState[currentPromoId] === undefined) likesState[currentPromoId] = 0;
-        if (userHasLiked[currentPromoId] === undefined) userHasLiked[currentPromoId] = false;
-
-        if (likeCountSpan) likeCountSpan.textContent = likesState[currentPromoId];
-        
-        if (btnLike) {
+    if (btnLike) {
+        btnLike.addEventListener("click", () => {
+            if (!userHasLiked[currentPromoId]) {
+                likesState[currentPromoId]++;
+                userHasLiked[currentPromoId] = true;
+                
+                // 🔥 Interacción de "Like" rastreada de forma individualizada para cada promoción
+                gtag('event', `like_${currentPromoId}`, {
+                    'tipo_accion': 'Like'
+                });
+                console.log(`[GA4] Evento: like_${currentPromoId} | Acción: Like`);
+            } else {
+                likesState[currentPromoId]--;
+                userHasLiked[currentPromoId] = false;
+            }
+            
+            const countSpan = document.getElementById("likeCount");
+            if (countSpan) countSpan.textContent = likesState[currentPromoId];
+            btnLike.classList.toggle("liked");
+            
             if (userHasLiked[currentPromoId]) {
-                btnLike.classList.add("liked");
                 btnLike.innerHTML = `<i class="fas fa-thumbs-up"></i> Te gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
             } else {
-                btnLike.classList.remove("liked");
                 btnLike.innerHTML = `<i class="far fa-thumbs-up"></i> Me gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
             }
-        }
-
-        if (commentsList) commentsList.innerHTML = "";
-        if (commentInput) commentInput.value = "";
-        if (modal) modal.style.display = "flex";
-
-        // 🔥 SOLUCIÓN DEFINITIVA PARA POWER BI: Envía el ID directamente en el nombre del evento
-        gtag('event', `promo_${currentPromoId}`, {
-            'texto_enlace': 'Ver detalles'
         });
-        console.log(`[GA4] Evento registrado: promo_${currentPromoId}`);
-    });
-});
+    }
 
-const closeModal = () => { if (modal) modal.style.display = "none"; };
-if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-window.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-
-if (btnLike) {
-    btnLike.addEventListener("click", () => {
-        if (!userHasLiked[currentPromoId]) {
-            likesState[currentPromoId]++;
-            userHasLiked[currentPromoId] = true;
+    if (btnShare) {
+        btnShare.addEventListener("click", () => {
+            alert("¡Enlace de promoción copiado al portapapeles!");
             
-            // 🔥 Interacción de "Like" rastreada de forma individualizada para cada promoción
-            gtag('event', `like_${currentPromoId}`, {
-                'tipo_accion': 'Like'
+            // 🔥 Interacción de "Compartir" vinculada directamente a la promoción correspondiente
+            gtag('event', `compartir_${currentPromoId}`, {
+                'tipo_accion': 'Compartir'
             });
-            console.log(`[GA4] Evento: like_${currentPromoId} | Acción: Like`);
-        } else {
-            likesState[currentPromoId]--;
-            userHasLiked[currentPromoId] = false;
-        }
-        
-        const countSpan = document.getElementById("likeCount");
-        if (countSpan) countSpan.textContent = likesState[currentPromoId];
-        btnLike.classList.toggle("liked");
-        
-        if (userHasLiked[currentPromoId]) {
-            btnLike.innerHTML = `<i class="fas fa-thumbs-up"></i> Te gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
-        } else {
-            btnLike.innerHTML = `<i class="far fa-thumbs-up"></i> Me gusta (<span id="likeCount">${likesState[currentPromoId]}</span>)`;
-        }
-    });
-}
-
-if (btnShare) {
-    btnShare.addEventListener("click", () => {
-        alert("¡Enlace de promoción copiado al portapapeles!");
-        
-        // 🔥 Interacción de "Compartir" vinculada directamente a la promoción correspondiente
-        gtag('event', `compartir_${currentPromoId}`, {
-            'tipo_accion': 'Compartir'
+            console.log(`[GA4] Evento: compartir_${currentPromoId} | Acción: Compartir`);
         });
-        console.log(`[GA4] Evento: compartir_${currentPromoId} | Acción: Compartir`);
-    });
-}
+    }
 
-if (btnComment) {
-    btnComment.addEventListener("click", () => {
-        const text = commentInput.value.trim();
-        if (text === "" || !commentsList) return;
+    if (btnComment) {
+        btnComment.addEventListener("click", () => {
+            const text = commentInput.value.trim();
+            if (text === "" || !commentsList) return;
 
-        const commentDiv = document.createElement("div");
-        commentDiv.className = "user-comment";
-        commentDiv.innerText = text;
-        commentsList.appendChild(commentDiv);
-        commentInput.value = "";
-        commentsList.scrollTop = commentsList.scrollHeight;
+            const commentDiv = document.createElement("div");
+            commentDiv.className = "user-comment";
+            commentDiv.innerText = text;
+            commentsList.appendChild(commentDiv);
+            commentInput.value = "";
+            commentsList.scrollTop = commentsList.scrollHeight;
 
-        // 🔥 Interacción de "Comentario" vinculada directamente a la promoción correspondiente
-        gtag('event', `comentario_${currentPromoId}`, {
-            'tipo_accion': 'Comentario'
+            // 🔥 Interacción de "Comentario" vinculada directamente a la promoción correspondiente
+            gtag('event', `comentario_${currentPromoId}`, {
+                'tipo_accion': 'Comentario'
+            });
+            console.log(`[GA4] Evento: comentario_${currentPromoId} | Acción: Comentario`);
         });
-        console.log(`[GA4] Evento: comentario_${currentPromoId} | Acción: Comentario`);
-    });
-}
+    }
 
-// =========================================================================
-// NUEVOS RASTREOS 
-// =========================================================================
+    // =========================================================================
+    // NUEVOS RASTREOS Y CORRECCIONES
+    // =========================================================================
 
-// A) Medir clics en los enlaces de la Campaña (Botón de WhatsApp de la sección campaña)
-const btnCampañaWhatsapp = document.querySelector(".campaña-seccion .card-cta");
-if (btnCampañaWhatsapp) {
-    btnCampañaWhatsapp.addEventListener("click", () => {
-        gtag('event', 'clic_campana_whatsapp', {
-            'seccion': 'Campaña Tu Bienestar Primero',
-            'destino': 'WhatsApp Clinica'
+    // A) Medir clics en los enlaces de la Campaña (Evitando errores con la eñe)
+    const btnCampanaWhatsapp = document.querySelector('[class*="campa"] .card-cta');
+    if (btnCampanaWhatsapp) {
+        btnCampanaWhatsapp.addEventListener("click", () => {
+            gtag('event', 'clic_campana_whatsapp', {
+                'seccion': 'Campaña Tu Bienestar Primero',
+                'destino': 'WhatsApp Clinica'
+            });
+            console.log("[GA4] Evento enviado: clic_campana_whatsapp");
         });
-        console.log("[GA4] Evento enviado: clic_campana_whatsapp");
+    }
+
+    // B) 🔥 MOTOR DE RASTREO AUTOMÁTICO DE REDES SOCIALES (TERCER GRÁFICO)
+    document.querySelectorAll('a[href*="facebook.com"], a[href*="instagram.com"], a[href*="tiktok.com"], a[href*="wa.me"], a[href*="whatsapp.com"]').forEach(link => {
+        link.addEventListener("click", (e) => {
+            const url = link.href.toLowerCase();
+            let redSocial = "desconocida";
+
+            if (url.includes("facebook")) redSocial = "facebook";
+            else if (url.includes("instagram")) redSocial = "instagram";
+            else if (url.includes("tiktok")) redSocial = "tiktok";
+            else if (url.includes("wa.me") || url.includes("whatsapp")) redSocial = "whatsapp";
+
+            gtag('event', `click_${redSocial}`, {
+                'url_destino': link.href
+            });
+            console.log(`[GA4] Red Social Detectada: click_${redSocial}`);
+        });
     });
-}
-
-
 
     // --- INTERACCIÓN 3: METRICAS DE LLAMADA ---
     if (btnCall) {
@@ -355,29 +371,29 @@ if (btnCampañaWhatsapp) {
     });
 
     // ── DROPDOWN SERVICIOS EN MÓVIL ──
-const dropdownToggle = document.querySelector('.dropdown-toggle');
-if (dropdownToggle) {
-    dropdownToggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        const dropdown = this.closest('.dropdown');
-        dropdown.classList.toggle('active');
-    });
-}
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const dropdown = this.closest('.dropdown');
+            dropdown.classList.toggle('active');
+        });
+    }
 
-// ── CERRAR MENÚ AL HACER CLIC EN CUALQUIER ENLACE ──
-const menuCheck = document.getElementById('menu-btn-check');
-const todosLosLinks = document.querySelectorAll('.nav > a, .nav .dropdown-menu a');
+    // ── CERRAR MENÚ AL HACER CLIC EN CUALQUIER ENLACE ──
+    const menuCheck = document.getElementById('menu-btn-check');
+    const todosLosLinks = document.querySelectorAll('.nav > a, .nav .dropdown-menu a');
 
-todosLosLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        // Cierra el menú hamburguesa
-        if (menuCheck) menuCheck.checked = false;
-        // Cierra el dropdown de servicios
-        const dropdown = document.querySelector('.dropdown');
-        if (dropdown) dropdown.classList.remove('active');
+    todosLosLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Cierra el menú hamburguesa
+            if (menuCheck) menuCheck.checked = false;
+            // Cierra el dropdown de servicios
+            const dropdown = document.querySelector('.dropdown');
+            if (dropdown) dropdown.classList.remove('active');
+        });
     });
-});
-   
+    
 
     // Botón Volver a la Landing principal
     if (btnVolver) {
@@ -451,17 +467,14 @@ reiniciarTemporizador();
 // MOTOR DE RESPUESTAS AUTOMÁTICAS POR PALABRAS CLAVE
 // ===================================================
 
-// Abre y cierra la ventana del chat alternando la clase, y limpia la conversación al cerrar
 function controlarChat() {
     const ventana = document.getElementById("clinica-chat-window");
     if (ventana) { 
         ventana.classList.toggle("chat-oculto"); 
 
-        // Si la ventana se acaba de cerrar (tiene la clase 'chat-oculto'), limpiamos los mensajes
         if (ventana.classList.contains("chat-oculto")) {
             const contenedorMensajes = document.getElementById("clinica-chat-body");
             if (contenedorMensajes) {
-                // Dejamos únicamente la burbuja con el saludo de bienvenida original
                 contenedorMensajes.innerHTML = `
                     <div class="burbuja msg-bot">
                         ¡Hola! Bienvenido a <strong>Clínica Vida</strong>. ¿En qué te puedo colaborar hoy? Puedes consultarme por nuestros servicios,  especialidades,  horarios,  dirección y promociones.
@@ -472,7 +485,6 @@ function controlarChat() {
     }
 }
 
-// Captura el Enter del teclado
 function detectarTeclaEnter(e) {
     if (e.key === 'Enter') { procesarEnvioUsuario(); }
 }
@@ -484,23 +496,16 @@ function procesarEnvioUsuario() {
 
     const contenedorMensajes = document.getElementById("clinica-chat-body");
 
-    // 1. Mostrar el mensaje del usuario en pantalla
     const burbujaUsuario = document.createElement("div");
     burbujaUsuario.className = "burbuja msg-usuario";
     burbujaUsuario.textContent = textoRaw;
     contenedorMensajes.appendChild(burbujaUsuario);
 
-    // Limpiar la caja de entrada de texto
     cajaTexto.value = "";
     contenedorMensajes.scrollTop = contenedorMensajes.scrollHeight;
 
-    // Convertir a minúsculas para buscar palabras clave fácilmente
     const mensajeMinuscula = textoRaw.toLowerCase();
     let respuestaBot = "";
-
-    // ===================================================
-    // LÓGICA DE RESPUESTAS POR PALABRAS CLAVE
-    // ===================================================
     
     if (mensajeMinuscula.includes("gracias") || mensajeMinuscula.includes("agradezco") || mensajeMinuscula.includes("buena onda") || mensajeMinuscula.includes("ok")) {
         respuestaBot = `
@@ -513,7 +518,6 @@ function procesarEnvioUsuario() {
             Te puedo ayudar con información sobre nuestros <strong>servicios</strong>, <strong>especialidades</strong>, <strong>horarios</strong>, <strong>dirección</strong> o las <strong>ofertas</strong> del mes. ¿Qué te gustaría consultar?
         `;
     }
-    // SEPARACIÓN 1: LOS 6 SERVICIOS DE APOYO
     else if (mensajeMinuscula.includes("servicio") || mensajeMinuscula.includes("adicional") || mensajeMinuscula.includes("farmacia") || mensajeMinuscula.includes("laboratorio")) {
         respuestaBot = `
             <strong>Nuestros Servicios de Apoyo y Clínicos:</strong><br>
@@ -525,7 +529,6 @@ function procesarEnvioUsuario() {
             6. Consulta General 
         `;
     } 
-    // SEPARACIÓN 2: LAS ESPECIALIDADES MÉDICAS
     else if (mensajeMinuscula.includes("especialidad") || mensajeMinuscula.includes("especialidades") || mensajeMinuscula.includes("atienden") || mensajeMinuscula.includes("médico") || mensajeMinuscula.includes("medico") || mensajeMinuscula.includes("doctor")) {
         respuestaBot = `
             <strong>Nuestras Especialidades Médicas:</strong><br>
@@ -540,7 +543,6 @@ function procesarEnvioUsuario() {
             • <strong>Lunes a Viernes:</strong> 7:00 AM a 5:00 PM<br>
             • <strong>Sábados:</strong> 7:00 AM a 12:00 PM<br>
             • <strong>Domingos:</strong> Cerrado
-            
         `;
     } 
     else if (mensajeMinuscula.includes("direccion") || mensajeMinuscula.includes("dirección") || mensajeMinuscula.includes("ubicacion") || mensajeMinuscula.includes("ubicación") || mensajeMinuscula.includes("donde") || mensajeMinuscula.includes("dónde")) {
@@ -549,7 +551,6 @@ function procesarEnvioUsuario() {
             Estamos ubicados de los semáforos de Linda Vista 1 1/2 c.Abajo. ¡Te esperamos!
         `;
     } 
-    // LAS 4 OFERTAS DISPONIBLES
     else if (mensajeMinuscula.includes("oferta") || mensajeMinuscula.includes("promocion") || mensajeMinuscula.includes("promoción") || mensajeMinuscula.includes("descuento") || mensajeMinuscula.includes("barato")) {
         respuestaBot = `
             <strong>🎉 ¡Nuestras 4 Ofertas Disponibles de este Mes! 🎉</strong><br><br>
@@ -572,14 +573,11 @@ function procesarEnvioUsuario() {
         `;
     }
 
-    // 2. Desplegar la respuesta del Bot simulando que está pensando
     setTimeout(() => {
         const burbujaBot = document.createElement("div");
         burbujaBot.className = "burbuja msg-bot";
         burbujaBot.innerHTML = respuestaBot;
         contenedorMensajes.appendChild(burbujaBot);
-        
-        // Auto-scroll hacia abajo
         contenedorMensajes.scrollTop = contenedorMensajes.scrollHeight;
     }, 450); 
 }
