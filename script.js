@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (error) throw error;
 
-                // 🌟 ALERTA ELEGANTE DE ÉXITO
+                // ALERTA  DE ÉXITO
                 Swal.fire({
                     title: '¡Registro Exitoso!',
                     text: '¡Paciente registrado con éxito en la Clínica Vida!',
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('Error de conexión:', error.message);
                 
-                // 🌟 ALERTA ELEGANTE DE ERROR
+                // ALERTA DE ERROR
                 Swal.fire({
                     title: 'Hubo un problema',
                     text: 'No se pudo registrar: ' + error.message,
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (commentInput) commentInput.value = "";
             if (modal) modal.style.display = "flex";
 
-            // 🔥 SOLUCIÓN DEFINITIVA PARA POWER BI: Envía el ID directamente en el nombre del evento
+            // Envía el ID directamente en el nombre del evento
             gtag('event', `promo_${currentPromoId}`, {
                 'texto_enlace': 'Ver detalles'
             });
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 likesState[currentPromoId]++;
                 userHasLiked[currentPromoId] = true;
                 
-                // 🔥 Interacción de "Like" rastreada de forma individualizada para cada promoción
+                // Interacción de "Like" rastreada de forma individualizada para cada promoción
                 gtag('event', `like_${currentPromoId}`, {
                     'tipo_accion': 'Like'
                 });
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnShare.addEventListener("click", () => {
             alert("¡Enlace de promoción copiado al portapapeles!");
             
-            // 🔥 Interacción de "Compartir" vinculada directamente a la promoción correspondiente
+            // Interacción de "Compartir" vinculada directamente a la promoción correspondiente
             gtag('event', `compartir_${currentPromoId}`, {
                 'tipo_accion': 'Compartir'
             });
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
             commentInput.value = "";
             commentsList.scrollTop = commentsList.scrollHeight;
 
-            // 🔥 Interacción de "Comentario" vinculada directamente a la promoción correspondiente
+            // Interacción de "Comentario" vinculada directamente a la promoción correspondiente
             gtag('event', `comentario_${currentPromoId}`, {
                 'tipo_accion': 'Comentario'
             });
@@ -271,10 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // NUEVOS RASTREOS Y CORRECCIONES
+    // INTERACCIONES DE LA CAMPAÑA
     // =========================================================================
 
-    // A) Medir clics en los enlaces de la Campaña (Evitando errores con la eñe)
+    // A) Medir clics en los enlaces de la Campaña )
     const btnCampanaWhatsapp = document.querySelector('[class*="campa"] .card-cta');
     if (btnCampanaWhatsapp) {
         btnCampanaWhatsapp.addEventListener("click", () => {
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // B) 🔥 MOTOR DE RASTREO AUTOMÁTICO DE REDES SOCIALES (TERCER GRÁFICO)
+    // B) MOTOR DE RASTREO AUTOMÁTICO DE REDES SOCIALES 
     document.querySelectorAll('a[href*="facebook.com"], a[href*="instagram.com"], a[href*="tiktok.com"], a[href*="wa.me"], a[href*="whatsapp.com"]').forEach(link => {
         link.addEventListener("click", (e) => {
             const url = link.href.toLowerCase();
@@ -532,9 +532,9 @@ function procesarEnvioUsuario() {
     else if (mensajeMinuscula.includes("especialidad") || mensajeMinuscula.includes("especialidades") || mensajeMinuscula.includes("atienden") || mensajeMinuscula.includes("médico") || mensajeMinuscula.includes("medico") || mensajeMinuscula.includes("doctor")) {
         respuestaBot = `
             <strong>Nuestras Especialidades Médicas:</strong><br>
-            • Medicina General 🩺<br>
-            • Pediatría 👶<br>
-            • Ginecología 🤰
+            • Medicina General <br>
+            • Pediatría <br>
+            • Ginecología 
         `;
     }
     else if (mensajeMinuscula.includes("horario") || mensajeMinuscula.includes("hora") || mensajeMinuscula.includes("abren") || mensajeMinuscula.includes("cierran")) {
